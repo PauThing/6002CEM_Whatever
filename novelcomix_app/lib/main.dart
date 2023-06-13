@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
       title: 'NovelComix',
       theme: ThemeData(
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Color(0xFFB71C1C),
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.grey,
+          backgroundColor: Color(0xFF731942),
+          selectedItemColor: Color(0xFFFFCDD2),
+          unselectedItemColor: Colors.white,
         ),
-        appBarTheme: AppBarTheme(backgroundColor: Color(0xFFB71C1C)),
+        appBarTheme: AppBarTheme(backgroundColor: Color(0xFF731942)),
       ),
       home: LoginPage(),
     );
