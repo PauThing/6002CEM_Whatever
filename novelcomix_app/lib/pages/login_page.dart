@@ -1,16 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/font_style.dart';
+import 'package:novelcomix_app/pages/home_page.dart';
+import 'package:novelcomix_app/pages/signup_page.dart';
 import 'package:novelcomix_app/widgets/textfieldWidget.dart';
 import 'package:novelcomix_app/widgets/widgets.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<SignIn> createState() => _SignInState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _SignInState extends State<SignIn> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
 
@@ -44,15 +47,15 @@ class _SignInState extends State<SignIn> {
                   child: Column(
                     children: [
                       Container(
-                        child: loginTextField(
+                        child: forTextField(
                             "Email", Icons.email, false, _emailTextController),
                       ),
                       SizedBox(
                         height: 15,
                       ),
                       Container(
-                        child: loginTextField(
-                            "Email", Icons.lock, true, _passwordTextController),
+                        child: forTextField("Password", Icons.lock, true,
+                            _passwordTextController),
                       ),
                       SizedBox(
                         height: 80,
@@ -64,7 +67,23 @@ class _SignInState extends State<SignIn> {
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                               primary: Color(0xffb71c1c)),
-                          onPressed: () {},
+                          onPressed: () {
+                            FirebaseAuth.instance
+                                .signInWithEmailAndPassword(
+                                    email: _emailTextController.text,
+                                    password: _passwordTextController.text)
+                                .then((value) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()));
+                            }).onError((error, stackTrace) {
+                              final snackbar = SnackBar(
+                                content: const Text("Sorry, Invalid Email or Password.."),
+                                action: SnackBarAction(label: 'OK', onPressed: (){}),);
+                              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                            });
+                          },
                           icon: Icon(
                             Icons.login,
                           ),
@@ -85,14 +104,14 @@ class _SignInState extends State<SignIn> {
           ),
           floatingActionButton: FloatingActionButton.extended(
             onPressed: () {
-
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SignUpPage()));
             },
             label: const Text("Sign Up Here"),
             backgroundColor: Color(0xffb71c1c),
             icon: const Icon(
               Icons.app_registration,
             ),
-
           ),
         ),
       ],

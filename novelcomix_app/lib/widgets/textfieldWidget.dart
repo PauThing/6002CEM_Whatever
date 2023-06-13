@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-TextField loginTextField(String text, IconData icon, bool isPasswordType,
+TextField forTextField(String text, IconData icon, bool isPasswordType,
     TextEditingController controller) {
   return TextField(
     controller: controller,
@@ -12,6 +12,7 @@ TextField loginTextField(String text, IconData icon, bool isPasswordType,
         icon,
         color: Colors.black26,
       ),
+      hintText: text,
       labelStyle: TextStyle(color: Colors.white.withOpacity(0.9)),
       filled: true,
       floatingLabelBehavior: FloatingLabelBehavior.never,
