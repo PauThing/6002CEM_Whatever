@@ -91,15 +91,21 @@ class SignIn extends StatelessWidget {
                     Container(
                       width: 250,
                       decoration: BoxDecoration(
-                        color: Color(0xFFB71C1C),
+                        color: Colors.transparent,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: ElevatedButton.icon(
-                        onPressed: () {
-
-                        },
-                        icon: Icon(Icons.login,),
-                        label: Text('Sign In'),
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.login,
+                        ),
+                        label: Text(
+                          'Sign In',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
                       ), //Need to add button
                     ),
                   ],
