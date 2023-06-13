@@ -9,5 +9,5 @@ const TextStyle signinTitle = TextStyle(
 
 const TextStyle signinText = TextStyle(
   color: Colors.black54,
-  fontSize: 20,
+  fontSize: 18,
 );

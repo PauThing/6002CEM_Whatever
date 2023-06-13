@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/sign_in.dart';
-import 'package:novelcomix_app/home_page.dart';
+import 'package:flutter/services.dart';
+import 'package:novelcomix_app/pages/sign_in.dart';
+import 'package:novelcomix_app/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +23,6 @@ class MyApp extends StatelessWidget {
           unselectedItemColor: Colors.grey,
         ),
         appBarTheme: AppBarTheme(backgroundColor: Color(0xFFB71C1C)),
-        primarySwatch: Colors.red,
       ),
       home: SignIn(),
     );
