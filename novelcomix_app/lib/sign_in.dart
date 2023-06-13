@@ -95,7 +95,9 @@ class SignIn extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () {
+
+                        },
                         icon: Icon(Icons.login,),
                         label: Text('Sign In'),
                       ), //Need to add button

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "955507621551",
+    "project_id": "novelcomix-db-21e3e",
+    "storage_bucket": "novelcomix-db-21e3e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:955507621551:android:7975c55019183c479d1e5a",
+        "android_client_info": {
+          "package_name": "com.example.novelcomix_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "955507621551-c9l96bok7n9qn5gr236u8cllb65j5ff2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMyre9zP8ZrjvOEI4rxNHzYXLDODrDVLo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "955507621551-c9l96bok7n9qn5gr236u8cllb65j5ff2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
