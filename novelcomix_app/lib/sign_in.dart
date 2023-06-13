@@ -86,15 +86,19 @@ class SignIn extends StatelessWidget {
                 Column(
                   children: [
                     SizedBox(
-                      height: 40,
+                      height: 80,
                     ),
                     Container(
-                      width: double.infinity,
+                      width: 250,
                       decoration: BoxDecoration(
                         color: Color(0xFFB71C1C),
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      //Need to add button
+                      child: ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.login,),
+                        label: Text('Sign In'),
+                      ), //Need to add button
                     ),
                   ],
                 ),
