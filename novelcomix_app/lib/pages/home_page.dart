@@ -1,13 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/font_style.dart';
+import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
+import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
 import 'package:novelcomix_app/widgets/widgets.dart';
 import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = '/HomePage';
+
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -17,6 +20,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
+  List screens = [HomePage(), ComicPage(), NovelPage()];
+
   void onClicked(int index) {
     setState(() {
       selectedIndex = index;
@@ -24,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   //signout function
   signOut() async {
     await auth.signOut();
@@ -37,50 +43,14 @@ class _HomePageState extends State<HomePage> {
         BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
-          // drawer: Drawer(
-          //   child: Column(
-          //     children: [
-          //       Container(
-          //         height: 100,
-          //         width: double.infinity,
-          //         color: const Color(0xFF731942),
-          //         child: Padding(
-          //           padding: const EdgeInsets.only(top: 50, left: 20),
-          //           child: Text(
-          //             "Genre",
-          //             style: TextStyle(
-          //                 color: Colors.white,
-          //                 fontWeight: FontWeight.bold,
-          //                 fontSize: 25),
-          //           ),
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          bottomNavigationBar: BottomNavigation(selectedIndex: selectedIndex, onClicked: onClicked,),
-          // bottomNavigationBar: BottomNavigationBar(
-          //   onTap: (index) {
-          //     setState(() {
-          //       myIndex = index;
-          //     });
-          //   },
-          //   currentIndex: myIndex,
-          //   type: BottomNavigationBarType.fixed,
-          //   items: const [
-          //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.bookmark), label: "Bookmark"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.menu_book), label: "Comics"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.my_library_books), label: "Novels"),
-          //   ],
-          // ),
+          bottomNavigationBar: BottomNavigation(
+            selectedIndex: selectedIndex,
+            onClicked: onClicked,
+          ),
           appBar: AppBar(
             automaticallyImplyLeading: false, //disable back button
             title: Text(
-              "Home",
+              "Welcome to NovelComix",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -126,7 +96,6 @@ class _HomePageState extends State<HomePage> {
                       "Comics",
                       style: homepageText,
                     ),
-
                   ),
                   SizedBox(
                     height: 20,
@@ -142,7 +111,6 @@ class _HomePageState extends State<HomePage> {
                       "Novels",
                       style: homepageText,
                     ),
-
                   ),
                 ],
               ),

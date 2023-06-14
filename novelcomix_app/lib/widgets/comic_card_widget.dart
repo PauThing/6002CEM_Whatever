@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 
-class ExerciseCardWidget extends StatelessWidget {
-  ComicModel exerciseModel;
+class ComicCardWidget extends StatelessWidget {
+  ComicModel comicModel;
 
-  ExerciseCardWidget({Key? key, required this.exerciseModel}) : super(key: key);
+  ComicCardWidget({Key? key, required this.comicModel}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class ExerciseCardWidget extends StatelessWidget {
                   topRight: Radius.circular(10),
                 ),
                 child: Image.network(
-                  exerciseModel.imageUrl,
+                  comicModel.imageUrl,
                   height: 150,
                   width: double.infinity,
                   fit: BoxFit.cover,
@@ -51,14 +51,14 @@ class ExerciseCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    exerciseModel.title,
+                    comicModel.title,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    exerciseModel.genre,
+                    comicModel.genre,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -70,7 +70,7 @@ class ExerciseCardWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                "Author : ${exerciseModel.author}",
+                "Author : ${comicModel.author}",
                 style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13,
