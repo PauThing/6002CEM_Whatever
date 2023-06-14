@@ -12,14 +12,6 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  int selectedIndex = 0;
-
-  void onClicked(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -27,20 +19,6 @@ class _UserProfileState extends State<UserProfile> {
         BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
-          bottomNavigationBar: BottomNavigation(selectedIndex: selectedIndex, onClicked: onClicked,),
-          // bottomNavigationBar: BottomNavigationBar(
-          //   onTap: (value) {},
-          //   type: BottomNavigationBarType.fixed,
-          //   items: const [
-          //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.bookmark), label: "Bookmark"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.menu_book), label: "Comics"),
-          //     BottomNavigationBarItem(
-          //         icon: Icon(Icons.my_library_books), label: "Novels"),
-          //   ],
-          // ),
           appBar: AppBar(
             title: Text(
               "Profile",
