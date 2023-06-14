@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gym_guide/model/exercise_model.dart';
-import 'package:gym_guide/pages/exercise_detail_page.dart';
+import 'package:novelcomix_app/models/comic_model.dart';
 
 class ExerciseCardWidget extends StatelessWidget {
-  ExerciseModel exerciseModel;
+  ComicModel exerciseModel;
 
   ExerciseCardWidget({Key? key, required this.exerciseModel}) : super(key: key);
 
@@ -11,10 +10,10 @@ class ExerciseCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(
-          ExerciseDetailPage.routeName,
-          arguments: exerciseModel,
-        );
+        // Navigator.of(context).pushNamed(
+        //   ExerciseDetailPage.routeName,
+        //   arguments: exerciseModel,
+        // );
       },
       child: Container(
         height: 230,
@@ -52,22 +51,18 @@ class ExerciseCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    exerciseModel.name,
+                    exerciseModel.title,
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Row(
-                    children: List.generate(
-                        5,
-                            (index) => Icon(
-                          index < exerciseModel.difficulty
-                              ? Icons.star
-                              : Icons.star_outline,
-                          size: 15,
-                          color: Colors.orange,
-                        )),
+                  Text(
+                    exerciseModel.genre,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
@@ -75,7 +70,7 @@ class ExerciseCardWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                "Equipment : ${exerciseModel.equipment.join(' ')}",
+                "Author : ${exerciseModel.author}",
                 style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13,

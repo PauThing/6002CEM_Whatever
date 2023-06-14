@@ -1,8 +1,8 @@
-class ComicsGenre {
+class ComicsGenreModel {
   final String imageSource;
   final String comicGenre;
 
-  ComicsGenre({
+  ComicsGenreModel({
     required this.imageSource,
     required this.comicGenre,
   });
