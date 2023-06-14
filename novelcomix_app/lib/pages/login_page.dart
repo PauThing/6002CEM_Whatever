@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: 250,
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffb71c1c)),
+                              backgroundColor: Color(0xFF731942)),
                           onPressed: () {
                             FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                   MaterialPageRoute(builder: (context) => SignUpPage()));
             },
             label: const Text("Sign Up Here"),
-            backgroundColor: Color(0xffb71c1c),
+            backgroundColor: Color(0xFF731942),
             icon: const Icon(
               Icons.app_registration,
             ),

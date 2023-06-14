@@ -11,3 +11,9 @@ const TextStyle signinText = TextStyle(
   color: Colors.black54,
   fontSize: 18,
 );
+
+const TextStyle homepageText = TextStyle(
+  color: Colors.black54,
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+);

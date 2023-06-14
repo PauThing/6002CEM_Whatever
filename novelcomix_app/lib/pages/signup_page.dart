@@ -17,7 +17,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _confirmTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +26,7 @@ class _SignUpPageState extends State<SignUpPage> {
         Scaffold(
           extendBodyBehindAppBar: true,
           appBar: AppBar(
-            backgroundColor: Color(0xffb71c1c).withOpacity(0.9),
+            backgroundColor: Color(0xFF731942).withOpacity(0.9),
             elevation: 0,
             title: Text(
               "Sign Up",
@@ -89,7 +88,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: 250,
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                              primary: Color(0xffb71c1c)),
+                              backgroundColor: Color(0xFF731942)),
                           onPressed: () {
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
