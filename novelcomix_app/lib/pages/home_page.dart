@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
-  List screens = [HomePage(), ComicPage(), NovelPage()];
+  List screens = [Home(), Comic(), Novel()];
 
   void onClicked(int index) {
     setState(() {
@@ -86,38 +86,111 @@ class _HomePageState extends State<HomePage> {
               ),
             ],
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Container(
-                    child: Text(
-                      "Comics",
-                      style: homepageText,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Divider(
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    child: Text(
-                      "Novels",
-                      style: homepageText,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          body: Container(
+            child: screens.elementAt(selectedIndex),
           ),
         ),
       ],
     );
   }
 }
+
+//Home
+class Home extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                child: Text(
+                  "Comics",
+                  style: homepageText,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(
+                color: Colors.black,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Container(
+                child: Text(
+                  "Novels",
+                  style: homepageText,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//Comics
+class Comic extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                child: Text(
+                  "Comics",
+                  style: homepageText,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//Novels
+class Novel extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Container(
+                child: Text(
+                  "Novels",
+                  style: homepageText,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
