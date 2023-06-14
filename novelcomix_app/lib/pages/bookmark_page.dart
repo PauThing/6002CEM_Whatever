@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:novelcomix_app/design/background_image.dart';
 
 class BookmarkPage extends StatelessWidget {
   const BookmarkPage({Key? key}) : super(key: key);
@@ -10,12 +11,11 @@ class BookmarkPage extends StatelessWidget {
     // String title = args["Bookmark"];
     // List<ComicModel> ListOfComic = args["comicList"];
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Bookmark"),
-        automaticallyImplyLeading: false,
+    return Stack(children: [
+      BackgroundImage(),
+      Scaffold(
+        backgroundColor: Colors.transparent,
       ),
-
-    );
+    ]);
   }
 }
