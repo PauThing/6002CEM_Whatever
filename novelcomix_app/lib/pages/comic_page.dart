@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:novelcomix_app/data/comics_genre_list.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
-import 'package:novelcomix_app/widgets/background_image.dart';
-import 'package:novelcomix_app/widgets/comic_card_widget.dart';
+import 'package:novelcomix_app/design/background_image.dart';
+import 'package:novelcomix_app/widgets/comic_genre_widget.dart';
 
 class ComicPage extends StatelessWidget {
+  static String routeName ='/ComicPage';
   const ComicPage({Key? key}) : super(key: key);
 
   @override
@@ -18,6 +20,35 @@ class ComicPage extends StatelessWidget {
         BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Comics Genre",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w900,
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+                Divider(
+                  color: Colors.blueGrey,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemBuilder: (context, index) => ComicGenreWidget(
+                      cGenreModel: comicGenreList[index],
+                    ),
+                    itemCount: comicGenreList.length,
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ],
       // appBar: AppBar(

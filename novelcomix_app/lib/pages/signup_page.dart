@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/font_style.dart';
+import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/widgets/textfieldWidget.dart';
-import '../widgets/background_image.dart';
+import '../design/background_image.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);

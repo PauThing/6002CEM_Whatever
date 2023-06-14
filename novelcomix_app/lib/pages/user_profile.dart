@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/font_style.dart';
-import 'package:novelcomix_app/widgets/widgets.dart';
+import 'package:novelcomix_app/design/font_style.dart';
+import 'package:novelcomix_app/design/widgets.dart';
 import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
 
 class UserProfile extends StatefulWidget {

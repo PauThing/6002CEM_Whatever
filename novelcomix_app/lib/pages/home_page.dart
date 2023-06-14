@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/font_style.dart';
+import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/pages/bookmark_page.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
-import 'package:novelcomix_app/widgets/widgets.dart';
+import 'package:novelcomix_app/design/widgets.dart';
 import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {

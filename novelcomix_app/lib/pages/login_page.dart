@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/font_style.dart';
+import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/pages/home_page.dart';
 import 'package:novelcomix_app/pages/signup_page.dart';
 import 'package:novelcomix_app/widgets/textfieldWidget.dart';
-import 'package:novelcomix_app/widgets/widgets.dart';
+import 'package:novelcomix_app/design/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/LoginPage';
