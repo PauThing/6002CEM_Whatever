@@ -14,7 +14,7 @@ List<ComicsGenreModel> comicGenreList = [
   ComicsGenreModel(
     comicGenre: "Fantasy",
     imageComic:
-        "https://img.freepik.com/free-vector/cute-monster-cat-fantasy-alien-planet-landscape_107791-13145.jpg?size=626&ext=jpg&ga=GA1.1.1232661040.1686732036&semt=ais",
+        "https://img.freepik.com/free-photo/fantastic-illustration-ancient-chinese-themes_456031-89.jpg?size=626&ext=jpg&ga=GA1.1.1232661040.1686732036&semt=ais",
   ),
   ComicsGenreModel(
     comicGenre: "Action",

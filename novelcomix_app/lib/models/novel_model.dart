@@ -1,4 +1,4 @@
-class ComicModel {
+class NovelModel {
   final String title;
   final String genre;
   final List<String> chapters;
@@ -6,7 +6,7 @@ class ComicModel {
   final String imageUrl;
   bool isFavourite;
 
-  ComicModel({
+  NovelModel({
     required this.genre,
     required this.imageUrl,
     required this.title,

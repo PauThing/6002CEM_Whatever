@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/home_page.dart';
+import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
 
 void main() async{
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         LoginPage.routeName: (context) => const LoginPage(),
         HomePage.routeName: (context) => HomePage(),
         UserProfile.routeName: (context) => UserProfile(),
-        ComicPage.routeName: (context) => ComicPage()
+        ComicPage.routeName: (context) => ComicPage(),
+        NovelPage.routeName: (context) => NovelPage()
         //ExerciseDetailPage.routeName: (context) => ExerciseDetailPage(refreshUI: refresh,),
       },
     );

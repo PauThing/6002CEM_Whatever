@@ -29,7 +29,7 @@ class ComicPage extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Comics Genre",
+                  "Comic Genres",
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 22,
