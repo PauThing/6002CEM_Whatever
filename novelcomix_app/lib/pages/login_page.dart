@@ -7,6 +7,7 @@ import 'package:novelcomix_app/widgets/textfieldWidget.dart';
 import 'package:novelcomix_app/widgets/widgets.dart';
 
 class LoginPage extends StatefulWidget {
+  static String routeName = '/LoginPage';
   const LoginPage({Key? key}) : super(key: key);
 
   @override

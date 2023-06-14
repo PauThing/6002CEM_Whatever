@@ -3,6 +3,7 @@ import 'package:novelcomix_app/font_style.dart';
 import 'package:novelcomix_app/widgets/widgets.dart';
 
 class UserProfile extends StatelessWidget {
+  static String routeName = '/UserProfile';
   const UserProfile({Key? key}) : super(key: key);
 
   @override

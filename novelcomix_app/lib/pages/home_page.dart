@@ -6,7 +6,7 @@ import 'package:novelcomix_app/pages/user_profile.dart';
 import 'package:novelcomix_app/widgets/widgets.dart';
 
 class HomePage extends StatefulWidget {
-  static String routeName = '/myHomePage';
+  static String routeName = '/HomePage';
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -19,8 +19,7 @@ class _HomePageState extends State<HomePage> {
   //signout function
   signOut() async {
     await auth.signOut();
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LoginPage()));
+    Navigator.of(context).pushNamed(LoginPage.routeName);
   }
 
   @override
@@ -84,10 +83,7 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(right: 5.0),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => UserProfile()));
+                        Navigator.of(context).pushNamed(UserProfile.routeName);
                       },
                       child: const CircleAvatar(
                         backgroundImage: AssetImage("assets/profile.png"),

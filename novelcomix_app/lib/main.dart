@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/home_page.dart';
+import 'package:novelcomix_app/pages/user_profile.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +29,14 @@ class MyApp extends StatelessWidget {
         ),
         appBarTheme: AppBarTheme(backgroundColor: Color(0xFF731942)),
       ),
-      home: LoginPage(),
+      //home: LoginPage(),
+      initialRoute: LoginPage.routeName,
+      routes: {
+        LoginPage.routeName: (context) => const LoginPage(),
+        HomePage.routeName: (context) => HomePage(),
+        UserProfile.routeName: (context) => UserProfile()
+        //ExerciseDetailPage.routeName: (context) => ExerciseDetailPage(refreshUI: refresh,),
+      },
     );
   }
 }
