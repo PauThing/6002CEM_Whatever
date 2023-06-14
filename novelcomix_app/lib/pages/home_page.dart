@@ -4,6 +4,7 @@ import 'package:novelcomix_app/font_style.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
 import 'package:novelcomix_app/widgets/widgets.dart';
+import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   static String routeName = '/HomePage';
@@ -14,7 +15,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int myIndex = 0;
+  int selectedIndex = 0;
+
+  void onClicked(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
+
   final FirebaseAuth auth = FirebaseAuth.instance;
   //signout function
   signOut() async {
@@ -50,24 +58,25 @@ class _HomePageState extends State<HomePage> {
           //     ],
           //   ),
           // ),
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index) {
-              setState(() {
-                myIndex = index;
-              });
-            },
-            currentIndex: myIndex,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.bookmark), label: "Bookmark"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.menu_book), label: "Comics"),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.my_library_books), label: "Novels"),
-            ],
-          ),
+          bottomNavigationBar: BottomNavigation(selectedIndex: selectedIndex, onClicked: onClicked,),
+          // bottomNavigationBar: BottomNavigationBar(
+          //   onTap: (index) {
+          //     setState(() {
+          //       myIndex = index;
+          //     });
+          //   },
+          //   currentIndex: myIndex,
+          //   type: BottomNavigationBarType.fixed,
+          //   items: const [
+          //     BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          //     BottomNavigationBarItem(
+          //         icon: Icon(Icons.bookmark), label: "Bookmark"),
+          //     BottomNavigationBarItem(
+          //         icon: Icon(Icons.menu_book), label: "Comics"),
+          //     BottomNavigationBarItem(
+          //         icon: Icon(Icons.my_library_books), label: "Novels"),
+          //   ],
+          // ),
           appBar: AppBar(
             automaticallyImplyLeading: false, //disable back button
             title: Text(
