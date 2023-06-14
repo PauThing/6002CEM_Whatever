@@ -44,13 +44,13 @@ class ComicGenreWidget extends StatelessWidget {
           //   );
           // },
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(15),
             child: SizedBox(
               child: Stack(
                 children: [
                   Image.network(
                     cGenreModel.imageComic,
-                    height: 150,
+                    height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
                   ),
@@ -61,12 +61,12 @@ class ComicGenreWidget extends StatelessWidget {
                       width: 440,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                            colors: [Colors.black, Colors.transparent]),
+                            colors: [Colors.blueGrey, Colors.transparent]),
                       ),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 20),
+                          padding: EdgeInsets.only(left: 25),
                           child: Text(
                             cGenreModel.comicGenre,
                             style: TextStyle(
@@ -85,7 +85,7 @@ class ComicGenreWidget extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 20,
+          height: 30,
         ),
       ],
     );

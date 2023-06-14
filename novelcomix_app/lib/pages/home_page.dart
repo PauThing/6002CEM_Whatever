@@ -39,59 +39,52 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        BackgroundImage(),
-        Scaffold(
-          backgroundColor: Colors.transparent,
-          bottomNavigationBar: BottomNavigation(
-            selectedIndex: selectedIndex,
-            onClicked: onClicked,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      bottomNavigationBar: BottomNavigation(
+        selectedIndex: selectedIndex,
+        onClicked: onClicked,
+      ),
+      appBar: AppBar(
+        automaticallyImplyLeading: false, //disable back button
+        title: Text(
+          "Welcome to NovelComix",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
           ),
-          appBar: AppBar(
-            automaticallyImplyLeading: false, //disable back button
-            title: Text(
-              "Welcome to NovelComix",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
+        ),
+        actions: [
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(right: 5.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(UserProfile.routeName);
+                  },
+                  child: const CircleAvatar(
+                    backgroundImage: AssetImage("assets/profile.png"),
+                  ),
+                ),
               ),
-            ),
-            actions: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 5.0),
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.of(context).pushNamed(UserProfile.routeName);
-                      },
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage("assets/profile.png"),
-                      ),
-                    ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: InkWell(
+                  onTap: () {
+                    signOut();
+                  },
+                  child: Icon(
+                    Icons.logout,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: InkWell(
-                      onTap: () {
-                        signOut();
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (context) => LoginPage()));
-                      },
-                      child: Icon(
-                        Icons.logout,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ],
           ),
-          body: Container(
-            child: screens.elementAt(selectedIndex),
-          ),
-        ),
-      ],
+        ],
+      ),
+      body: Container(
+        child: screens.elementAt(selectedIndex),
+      ),
     );
   }
 }
@@ -100,37 +93,42 @@ class _HomePageState extends State<HomePage> {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              Container(
-                child: Text(
-                  "Comics",
-                  style: homepageText,
-                ),
+    return Stack(
+      children: [
+        BackgroundImage(),
+        Container(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                children: [
+                  Container(
+                    child: Text(
+                      "Comics",
+                      style: homepageText,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    child: Text(
+                      "Novels",
+                      style: homepageText,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Divider(
-                color: Colors.black,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                child: Text(
-                  "Novels",
-                  style: homepageText,
-                ),
-              ),
-            ],
+            ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

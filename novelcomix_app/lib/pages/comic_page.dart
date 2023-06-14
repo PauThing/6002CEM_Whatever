@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:novelcomix_app/data/comics_genre_list.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/design/background_image.dart';
+import 'package:novelcomix_app/models/genre_model.dart';
 import 'package:novelcomix_app/widgets/comic_genre_widget.dart';
 
 class ComicPage extends StatelessWidget {
@@ -12,8 +13,8 @@ class ComicPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // final args =
     // ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    // String title = args["Comic"];
-    // List<ComicModel> ListOfComic = args["comicList"];
+    // String title = args["title"];
+    //List<NavigationName> ListOfComic = args["comicList"];
 
     return Stack(
       children: [
@@ -21,7 +22,7 @@ class ComicPage extends StatelessWidget {
         Scaffold(
           backgroundColor: Colors.transparent,
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Column(
               children: [
                 SizedBox(
@@ -31,7 +32,7 @@ class ComicPage extends StatelessWidget {
                   "Comics Genre",
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
-                    fontSize: 20,
+                    fontSize: 22,
                     fontStyle: FontStyle.italic,
                   ),
                 ),
@@ -51,9 +52,6 @@ class ComicPage extends StatelessWidget {
           ),
         ),
       ],
-      // appBar: AppBar(
-      //   title: Text(title),
-      // ),
       // body: Padding(
       //   padding: const EdgeInsets.all(8.0),
       //   child: ListView.separated(
