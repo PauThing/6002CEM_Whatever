@@ -1,18 +1,7 @@
 import 'package:novelcomix_app/models/novel_model.dart';
 
-List<NovelModel> comicList = [
+List<NovelModel> novelList = [
   //Romance
-  NovelModel(
-    title: 'Lethal Romance',
-    genre: 'Romance',
-    chapters: 5,
-    description: 'A woman who is like a martial arts manhwa character "Yubi". A man who is like a shoujo manhwa character "Shinwoo". The two who are used to living in their own genres won’t easily fall for each other! Will they be able to achieve a happy ending according to the standard of manhwa?!',
-    author: 'Grrr',
-    publication: '2020',
-    status: 'Completed',
-    imageUrl:
-        'https://mangadex.org/covers/6e9f81c1-a093-4ee0-8894-13c32586406c/d980b34d-cd0a-4417-8b30-8df68b25dacf.jpg.512.jpg',
-  ),
   NovelModel(
     title: 'Rebirth After Divorce',
     genre: 'Romance',

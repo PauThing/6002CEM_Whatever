@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/data/comic_genre_list.dart';
 import 'package:novelcomix_app/data/comic.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/models/genre_model.dart';
 import 'package:novelcomix_app/pages/comic_list_page.dart';
-import 'package:novelcomix_app/pages/comic_page.dart';
 
 class ComicGenreWidget extends StatelessWidget {
   final ComicsGenreModel cGenreModel;

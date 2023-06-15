@@ -8,6 +8,8 @@ import 'package:novelcomix_app/pages/comic_list_page.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/home_page.dart';
+import 'package:novelcomix_app/pages/novel_detail_page.dart';
+import 'package:novelcomix_app/pages/novel_list_page.dart';
 import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
 
@@ -53,8 +55,9 @@ class _MyAppState extends State<MyApp> {
         ComicPage.routeName: (context) => ComicPage(),
         ComicListPage.routeName: (context) => ComicListPage(),
         ComicDetailPage.routeName: (context) => ComicDetailPage(refreshUI: refresh,),
-        NovelPage.routeName: (context) => NovelPage()
-        //ExerciseDetailPage.routeName: (context) => ExerciseDetailPage(refreshUI: refresh,),
+        NovelPage.routeName: (context) => NovelPage(),
+        NovelListPage.routeName: (context) => NovelListPage(),
+        NovelDetailPage.routeName: (context) => NovelDetailPage(refreshUI: refresh,),
       },
     );
   }

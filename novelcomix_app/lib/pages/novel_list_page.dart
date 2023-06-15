@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/data/comic.dart';
 import 'package:novelcomix_app/design/background_image.dart';
-import 'package:novelcomix_app/models/comic_model.dart';
+import 'package:novelcomix_app/models/novel_model.dart';
 import 'package:novelcomix_app/widgets/novelcomix_card_widget.dart';
 
-class ComicListPage extends StatelessWidget {
-  static String routeName = '/comicListPage';
+class NovelListPage extends StatelessWidget {
+  static String routeName = '/novelListPage';
 
-  const ComicListPage({Key? key}) : super(key: key);
+  const NovelListPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     String title = args["title"];
-    List<ComicModel> listOfComic = args["comicList"];
+    List<NovelModel> listOfNovel = args["novelList"];
 
     return Stack(
       children: [
@@ -27,10 +27,10 @@ class ComicListPage extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: ListView.separated(
               physics: BouncingScrollPhysics(),
-              itemBuilder: (context, index) => ComicCardWidget(
-                comicModel: listOfComic[index],
+              itemBuilder: (context, index) => NovelCardWidget(
+                novelModel: listOfNovel[index],
               ),
-              itemCount: listOfComic.length,
+              itemCount: listOfNovel.length,
               separatorBuilder: (context, index) => SizedBox(
                 height: 20,
               ),

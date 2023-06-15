@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/data/novel_genre_list.dart';
+import 'package:novelcomix_app/data/novel.dart';
 import 'package:novelcomix_app/models/novel_model.dart';
 import 'package:novelcomix_app/models/genre_model.dart';
-import 'package:novelcomix_app/pages/novel_page.dart';
+import 'package:novelcomix_app/pages/novel_list_page.dart';
 
 class NovelGenreWidget extends StatelessWidget {
   final NovelGenreModel nGenreModel;
@@ -17,32 +17,20 @@ class NovelGenreWidget extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          // onTap: () {
-          //   list = exerciseList
-          //       .where((element) =>
-          //   element.category == wCategoryModel.categoryName)
-          //       .toList()
-          //       .where(
-          //           (element) => element.difficulty <= AppState.difficultyLevel)
-          //       .toList();
-          //
-          //   if (AppState.selectedEquipment == Equipment.equipment) {
-          //     list = list
-          //         .where((element) => element.equipment.isNotEmpty)
-          //         .toList();
-          //   } else if (AppState.selectedEquipment == Equipment.noEquipment) {
-          //     list =
-          //         list.where((element) => element.equipment.isEmpty).toList();
-          //   }
-          //
-          //   Navigator.of(context).pushNamed(
-          //     ActivityListPage.routeName,
-          //     arguments: {
-          //       'title': wCategoryModel.categoryName,
-          //       'exerciseList': list,
-          //     },
-          //   );
-          // },
+          onTap: () {
+            list = novelList
+                .where((element) =>
+            element.genre == nGenreModel.novelGenre)
+                .toList();
+
+            Navigator.of(context).pushNamed(
+              NovelListPage.routeName,
+              arguments: {
+                'title': nGenreModel.novelGenre,
+                'novelList': list,
+              },
+            );
+          },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: SizedBox(

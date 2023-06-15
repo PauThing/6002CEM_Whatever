@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/data/comic_genre_list.dart';
-import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/design/background_image.dart';
-import 'package:novelcomix_app/models/genre_model.dart';
 import 'package:novelcomix_app/widgets/comic_genre_widget.dart';
 
 class ComicPage extends StatelessWidget {
-  static String routeName ='/ComicPage';
+  static String routeName = '/ComicPage';
+
   const ComicPage({Key? key}) : super(key: key);
 
   @override
@@ -47,20 +46,6 @@ class ComicPage extends StatelessWidget {
           ),
         ),
       ],
-      // body: Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: ListView.separated(
-      //     itemCount: ListOfComic.length,
-      //     separatorBuilder: (context, index) => SizedBox(
-      //       height: 20.0,
-      //     ),
-      //     physics: BouncingScrollPhysics(),
-      //     itemBuilder: (context, index) => ComicCardWidget(
-      //       comicModel: ListOfComic[index],
-      //     ),
-      //
-      //   ),
-      // ),
     );
   }
 }
