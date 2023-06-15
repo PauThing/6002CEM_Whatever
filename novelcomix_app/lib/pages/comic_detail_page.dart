@@ -36,21 +36,27 @@ class ComicDetailPage extends StatelessWidget {
           children: [
             Image.network(
               comicModel.imageUrl,
-              height: 200,
-              width: double.infinity,
-              fit: BoxFit.cover,
+              alignment: Alignment.center,
+              height: 220,
+              width: 160,
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Text(
               comicModel.title,
               style: const TextStyle(
-                fontSize: 32,
+                fontSize: 25,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
-              "Author : " + comicModel.author,
+              "Author : ${comicModel.author}",
               style: const TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.normal,
                 color: Colors.grey,
                 fontStyle: FontStyle.italic,
@@ -61,31 +67,43 @@ class ComicDetailPage extends StatelessWidget {
             ),
             const Text(
               "Description",
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Text(
               comicModel.description,
+              textAlign: TextAlign.justify,
               style: const TextStyle(
-                fontSize: 18,
+                fontSize: 16,
+                color: Colors.black54,
                 fontWeight: FontWeight.normal,
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 25,
             ),
             const Text(
               "Chapters",
-              style: TextStyle(fontWeight: FontWeight.w900),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w900),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             Wrap(
               direction: Axis.horizontal,
               children: List.generate(comicModel.chapters, (index) {
                 var i = index + 1;
                 return Card(
-                  color: Color(0xFF0E2376),
+                  color: Color(0xFF731942),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        top: 5.0, bottom: 5.0, left: 15.0, right: 15.0),
+                        top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
                     child: Text(
                       "Chapter " + i.toString(),
                       style: TextStyle(

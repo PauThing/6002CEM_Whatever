@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ComicModel {
   final String title;
   final String genre;

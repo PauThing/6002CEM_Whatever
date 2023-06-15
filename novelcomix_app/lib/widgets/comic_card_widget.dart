@@ -17,7 +17,7 @@ class ComicCardWidget extends StatelessWidget {
         );
       },
       child: Container(
-        height: 220,
+        height: 190,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -36,8 +36,8 @@ class ComicCardWidget extends StatelessWidget {
               child: ClipRRect(
                 child: Image.network(
                   comicModel.imageUrl,
-                  height: 200,
-                  width: 130,
+                  height: 170,
+                  width: 110,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -50,18 +50,18 @@ class ComicCardWidget extends StatelessWidget {
                   Text(
                     comicModel.title,
                     style: const TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   Text(
                     "Genre : ${comicModel.genre}",
                     style: const TextStyle(
-                      color: Colors.blueGrey,
-                      fontSize: 16,
+                      color: Colors.indigo,
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -71,7 +71,7 @@ class ComicCardWidget extends StatelessWidget {
                   Text(
                     "Author : ${comicModel.author}",
                     style: const TextStyle(
-                        color: Colors.indigo,
+                        color: Colors.blueGrey,
                         fontSize: 14,
                         fontWeight: FontWeight.bold),
                   ),

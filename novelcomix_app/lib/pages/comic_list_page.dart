@@ -24,7 +24,7 @@ class ComicListPage extends StatelessWidget {
             title: Text(title),
           ),
           body: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(8.0),
             child: ListView.separated(
               physics: BouncingScrollPhysics(),
               itemBuilder: (context, index) => ComicCardWidget(
@@ -32,7 +32,7 @@ class ComicListPage extends StatelessWidget {
               ),
               itemCount: listOfComic.length,
               separatorBuilder: (context, index) => SizedBox(
-                height: 25,
+                height: 15,
               ),
             ),
           ),
