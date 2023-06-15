@@ -32,7 +32,7 @@ class ComicListPage extends StatelessWidget {
               ),
               itemCount: listOfComic.length,
               separatorBuilder: (context, index) => SizedBox(
-                height: 20,
+                height: 25,
               ),
             ),
           ),

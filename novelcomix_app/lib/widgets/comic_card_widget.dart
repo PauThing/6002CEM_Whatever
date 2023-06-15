@@ -17,7 +17,7 @@ class ComicCardWidget extends StatelessWidget {
         );
       },
       child: Container(
-        height: 20,
+        height: 220,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -28,51 +28,76 @@ class ComicCardWidget extends StatelessWidget {
             )
           ],
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
-
                 child: Image.network(
                   comicModel.imageUrl,
                   height: 200,
-                  width: double.infinity,
+                  width: 130,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     comicModel.title,
-                    style: TextStyle(
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Genre : ${comicModel.genre}",
+                    style: const TextStyle(
+                      color: Colors.blueGrey,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Text(
-                    comicModel.genre,
-                    style: TextStyle(
+                    "Author : ${comicModel.author}",
+                    style: const TextStyle(
+                        color: Colors.indigo,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    "Publication : ${comicModel.publication}",
+                    style: const TextStyle(
+                      color: Colors.grey,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Text(
+                    "Status : ${comicModel.status}",
+                    style: const TextStyle(
+                      color: Colors.pink,
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Text(
-                "Author : ${comicModel.author}",
-                style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
               ),
             ),
           ],

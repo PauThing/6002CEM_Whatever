@@ -16,6 +16,8 @@ List<ComicModel> comicList = [
       'Chapter 9'
     ],
     author: 'Grrr',
+    publication: "2020",
+    status: "Completed",
     imageUrl:
         'https://mangadex.org/covers/6e9f81c1-a093-4ee0-8894-13c32586406c/d980b34d-cd0a-4417-8b30-8df68b25dacf.jpg.512.jpg',
   ),
@@ -31,6 +33,8 @@ List<ComicModel> comicList = [
       'Chapter 6'
     ],
     author: 'Mikimoto Rin',
+    publication: "2021",
+    status: "Ongoing",
     imageUrl:
         'https://mangadex.org/covers/a2d16852-2aa2-42aa-903c-e5ce5b990d65/f65ede92-c394-4c7b-b68f-96b3fbf5ec1e.jpg.512.jpg',
   ),

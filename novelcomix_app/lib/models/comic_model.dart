@@ -3,6 +3,8 @@ class ComicModel {
   final String genre;
   final List<String> chapters;
   final String author;
+  final String publication;
+  final String status;
   final String imageUrl;
   bool isFavourite;
 
@@ -12,6 +14,8 @@ class ComicModel {
     required this.title,
     required this.chapters,
     required this.author,
+    required this.publication,
+    required this.status,
     this.isFavourite = false,
   });
 }
