@@ -12,6 +12,8 @@ import 'package:novelcomix_app/pages/novel_detail_page.dart';
 import 'package:novelcomix_app/pages/novel_list_page.dart';
 import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
+import 'package:novelcomix_app/widgets/comic_bookmark.dart';
+import 'package:novelcomix_app/widgets/novel_bookmark.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +54,8 @@ class _MyAppState extends State<MyApp> {
         HomePage.routeName: (context) => HomePage(),
         UserProfile.routeName: (context) => UserProfile(),
         BookmarkPage.routeName: (context) => BookmarkPage(),
+        ComicBookmarkPage.routeName: (context) => ComicBookmarkPage(),
+        NovelBookmarkPage.routeName: (context) => NovelBookmarkPage(),
         ComicPage.routeName: (context) => ComicPage(),
         ComicListPage.routeName: (context) => ComicListPage(),
         ComicDetailPage.routeName: (context) => ComicDetailPage(refreshUI: refresh,),
