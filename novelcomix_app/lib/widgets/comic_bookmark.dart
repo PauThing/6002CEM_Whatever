@@ -3,12 +3,18 @@ import 'package:novelcomix_app/data/comic.dart';
 import 'package:novelcomix_app/design/background_image.dart';
 import 'package:novelcomix_app/widgets/novelcomix_card_widget.dart';
 
+import '../models/comic_model.dart';
+
 class ComicBookmarkPage extends StatelessWidget {
-  static String routeName ='/ComicBookmarkPage';
+  static String routeName = '/ComicBookmarkPage';
+
   const ComicBookmarkPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<ComicModel> favoriteComics =
+        comicList.where((element) => element.isFavourite == true).toList();
+
     return Stack(
       children: [
         BackgroundImage(),
@@ -32,22 +38,28 @@ class ComicBookmarkPage extends StatelessWidget {
                 Divider(
                   color: Colors.blueGrey,
                 ),
-                Expanded(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) {
-                      return SizedBox(height: 15);
-                    },
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) => ComicCardWidget(
-                        comicModel: comicList
-                            .where((element) => element.isFavourite == true)
-                            .toList()[index]),
-                    itemCount: comicList
-                        .where((element) => element.isFavourite == true)
-                        .toList()
-                        .length,
-                  ),
-                ),
+                favoriteComics.isEmpty
+                    ? Center(
+                        child: Text("No bookmarked comics"),
+                      )
+                    : Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) =>
+                              SizedBox(height: 15),
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            if (index >= 0 && index < favoriteComics.length) {
+                              return ComicCardWidget(
+                                comicModel: favoriteComics[index],
+                              );
+                            } else {
+                              // Handle the case when the index is out of range
+                              return SizedBox();
+                            }
+                          },
+                          itemCount: favoriteComics.length,
+                        ),
+                      ),
               ],
             ),
           ),
