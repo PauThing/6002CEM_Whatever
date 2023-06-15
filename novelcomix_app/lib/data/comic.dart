@@ -47,7 +47,7 @@ List<ComicModel> comicList = [
     'https://mangadex.org/covers/a25e46ec-30f7-4db6-89df-cacbc1d9a900/a6838b90-fa2b-4228-9650-3adab0961747.jpg.512.jpg',
   ),
   ComicModel(
-    title: 'The Villainess Turns the \nHourglass',
+    title: 'The Villainess Turns the Hourglass',
     genre: 'Romance',
     chapters: 102,
     description: 'With the marriage of her prostitute mother to the Count, Aria’s status in society skyrocketed immediately. After leading a life of luxury, Aria unfairly meets death because of her sister Mielle’s schemes. And right before she dies, she sees an hourglass fall as if it were a fantasy. And just like that, she was miraculously brought back to the past. "I want to become a very elegant person, just like my sister, Mielle." In order to face the villainess, she must become an even more wicked villainess. This was the new path Aria chose to take revenge on Mielle who murdered both her and her mother.',
@@ -60,7 +60,7 @@ List<ComicModel> comicList = [
 
   //Adventure
   ComicModel(
-    title: 'Tensei Shitara Ken \nDeshita',
+    title: 'Tensei Shitara Ken Deshita',
     genre: 'Adventure',
     chapters: 67,
     description: 'When he realized it, the protagonist was in another world and had become a sword that was stabbed on an altar in a great plain, crowded with devil beast. The world he was in had a game like system; HP, MP, Strength, Vitality, Agility, Intelligence, Dexterity, Titles and Equipment. Following his instinct as a living sword, he traveled to find the one who could be his wielder, until he met with a cat girl that was about to be attacked by a bear type devil beast.',
@@ -96,7 +96,7 @@ List<ComicModel> comicList = [
 
   //Fantasy
   ComicModel(
-    title: 'Tensei Shitara Ken \nDeshita',
+    title: 'Tensei Shitara Ken Deshita',
     genre: 'Fantasy',
     chapters: 67,
     description: 'When he realized it, the protagonist was in another world and had become a sword that was stabbed on an altar in a great plain, crowded with devil beast. The world he was in had a game like system; HP, MP, Strength, Vitality, Agility, Intelligence, Dexterity, Titles and Equipment. Following his instinct as a living sword, he traveled to find the one who could be his wielder, until he met with a cat girl that was about to be attacked by a bear type devil beast.',

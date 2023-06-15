@@ -44,62 +44,64 @@ class ComicCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    comicModel.title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      comicModel.title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Genre : ${comicModel.genre}",
-                    style: const TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Author : ${comicModel.author}",
-                    style: const TextStyle(
-                        color: Colors.blueGrey,
+                    Text(
+                      "Genre : ${comicModel.genre}",
+                      style: const TextStyle(
+                        color: Colors.indigo,
                         fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Publication : ${comicModel.publication}",
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Status : ${comicModel.status}",
-                    style: const TextStyle(
-                      color: Colors.pink,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(
+                      height: 5,
                     ),
-                  ),
-                ],
+                    Text(
+                      "Author : ${comicModel.author}",
+                      style: const TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Publication : ${comicModel.publication}",
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Status : ${comicModel.status}",
+                      style: const TextStyle(
+                        color: Colors.pink,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -149,64 +151,65 @@ class NovelCardWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Flexible(
-                    child: Text(
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
                       novelModel.title,
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
+                      softWrap: true,
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Genre : ${novelModel.genre}",
-                    style: const TextStyle(
-                      color: Colors.indigo,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(
+                      height: 15,
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Author : ${novelModel.author}",
-                    style: const TextStyle(
-                        color: Colors.blueGrey,
+                    Text(
+                      "Genre : ${novelModel.genre}",
+                      style: const TextStyle(
+                        color: Colors.indigo,
                         fontSize: 14,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "Publication : ${novelModel.publication}",
-                    style: const TextStyle(
-                      color: Colors.grey,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    "Status : ${novelModel.status}",
-                    style: const TextStyle(
-                      color: Colors.pink,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(
+                      height: 5,
                     ),
-                  ),
-                ],
+                    Text(
+                      "Author : ${novelModel.author}",
+                      style: const TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "Publication : ${novelModel.publication}",
+                      style: const TextStyle(
+                        color: Colors.grey,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      "Status : ${novelModel.status}",
+                      style: const TextStyle(
+                        color: Colors.pink,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
