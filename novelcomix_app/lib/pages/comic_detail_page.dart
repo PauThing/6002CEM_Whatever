@@ -101,13 +101,17 @@ class ComicDetailPage extends StatelessWidget {
                 var i = index + 1;
                 return Card(
                   color: Color(0xFF731942),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10.0, bottom: 10.0, left: 15.0, right: 15.0),
-                    child: Text(
-                      "Chapter " + i.toString(),
-                      style: TextStyle(
-                        color: Colors.white,
+                  child: SizedBox(
+                    width: 115,
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 12.0, bottom: 12.0,),
+                      child: Text(
+                        "Chapter " + i.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),

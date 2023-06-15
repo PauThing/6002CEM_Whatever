@@ -19,7 +19,7 @@ class ComicCardWidget extends StatelessWidget {
       child: Container(
         height: 190,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white70,
           boxShadow: [
             BoxShadow(
               blurRadius: 4,
