@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/data/comics_genre_list.dart';
+import 'package:novelcomix_app/data/comic_genre_list.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/design/background_image.dart';
 import 'package:novelcomix_app/models/genre_model.dart';
@@ -11,11 +11,6 @@ class ComicPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final args =
-    // ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-    // String title = args["title"];
-    //List<NavigationName> ListOfComic = args["comicList"];
-
     return Stack(
       children: [
         BackgroundImage(),

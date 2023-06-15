@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/background_image.dart';
 
 class BookmarkPage extends StatelessWidget {
+  static String routeName ='/BookmarkPage';
   const BookmarkPage({Key? key}) : super(key: key);
 
   @override

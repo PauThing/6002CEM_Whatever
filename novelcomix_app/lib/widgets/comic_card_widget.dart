@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
+import 'package:novelcomix_app/pages/comic_detail_page.dart';
 
 class ComicCardWidget extends StatelessWidget {
   ComicModel comicModel;
@@ -10,13 +11,13 @@ class ComicCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.of(context).pushNamed(
-        //   ExerciseDetailPage.routeName,
-        //   arguments: exerciseModel,
-        // );
+        Navigator.of(context).pushNamed(
+          ComicDetailPage.routeName,
+          arguments: comicModel,
+        );
       },
       child: Container(
-        height: 230,
+        height: 20,
         decoration: BoxDecoration(
           color: Colors.white,
           boxShadow: [
@@ -31,36 +32,33 @@ class ComicCardWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(15.0),
               child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
+
                 child: Image.network(
                   comicModel.imageUrl,
-                  height: 150,
+                  height: 200,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     comicModel.title,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     comicModel.genre,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -68,12 +66,12 @@ class ComicCardWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: Text(
                 "Author : ${comicModel.author}",
                 style: const TextStyle(
                     color: Colors.grey,
-                    fontSize: 13,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold),
               ),
             ),

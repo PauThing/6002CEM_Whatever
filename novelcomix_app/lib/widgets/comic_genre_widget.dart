@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/data/comics_genre_list.dart';
+import 'package:novelcomix_app/data/comic_genre_list.dart';
+import 'package:novelcomix_app/data/comic.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/models/genre_model.dart';
+import 'package:novelcomix_app/pages/comic_list_page.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 
 class ComicGenreWidget extends StatelessWidget {
@@ -17,34 +19,22 @@ class ComicGenreWidget extends StatelessWidget {
     return Column(
       children: [
         InkWell(
-          // onTap: () {
-          //   list = exerciseList
-          //       .where((element) =>
-          //   element.category == wCategoryModel.categoryName)
-          //       .toList()
-          //       .where(
-          //           (element) => element.difficulty <= AppState.difficultyLevel)
-          //       .toList();
-          //
-          //   if (AppState.selectedEquipment == Equipment.equipment) {
-          //     list = list
-          //         .where((element) => element.equipment.isNotEmpty)
-          //         .toList();
-          //   } else if (AppState.selectedEquipment == Equipment.noEquipment) {
-          //     list =
-          //         list.where((element) => element.equipment.isEmpty).toList();
-          //   }
-          //
-          //   Navigator.of(context).pushNamed(
-          //     ActivityListPage.routeName,
-          //     arguments: {
-          //       'title': wCategoryModel.categoryName,
-          //       'exerciseList': list,
-          //     },
-          //   );
-          // },
+          onTap: () {
+            list = comicList
+                .where((element) =>
+            element.genre == cGenreModel.comicGenre)
+                .toList();
+
+            Navigator.of(context).pushNamed(
+              ComicListPage.routeName,
+              arguments: {
+                'title': cGenreModel.comicGenre,
+                'comicList': list,
+              },
+            );
+          },
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(15.0),
             child: SizedBox(
               child: Stack(
                 children: [

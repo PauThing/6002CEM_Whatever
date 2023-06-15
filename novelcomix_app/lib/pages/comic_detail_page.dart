@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:collection/collection.dart';
 
-class ExerciseDetailPage extends StatelessWidget {
+class ComicDetailPage extends StatelessWidget {
   static String routeName = '/comicDetailPage';
 
   Function() refreshUI;
 
-  ExerciseDetailPage({Key? key, required this.refreshUI}) : super(key: key);
+  ComicDetailPage({Key? key, required this.refreshUI}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
