@@ -71,7 +71,30 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(12.0),
                 child: InkWell(
                   onTap: () {
-                    signOut();
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("You are about to log out!"),
+                            content: Text(
+                                "Are you sure you want to proceed to Log In Page?"),
+                            actions: [
+                              TextButton(
+                                child: Text("Cancel"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                              TextButton(
+                                child: Text("Yes"),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  signOut();
+                                },
+                              )
+                            ],
+                          );
+                        });
                   },
                   child: Icon(
                     Icons.logout,
