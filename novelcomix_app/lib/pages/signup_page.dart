@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
@@ -90,11 +91,13 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFF731942)),
                           onPressed: () {
+                            //register new user with email and password
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                                     email: _emailTextController.text,
                                     password: _passwordTextController.text)
                                 .then((value) {
+                              //To notify the user account have created
                               final snackbar = SnackBar(
                                 content: const Text("Yay, Account Created!"),
                                 action: SnackBarAction(
@@ -103,12 +106,53 @@ class _SignUpPageState extends State<SignUpPage> {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackbar);
 
+                              //Get current user
+                              FirebaseAuth auth = FirebaseAuth.instance;
+                              User? currentUser = auth.currentUser;
+
+                              if (currentUser != null) {
+                                String uid = currentUser.uid;
+                                DatabaseReference userRef = FirebaseDatabase
+                                    .instance
+                                    .reference()
+                                    .child('users')
+                                    .child(uid);
+                                userRef
+                                    .child('username')
+                                    .set(_usernameTextController.text);
+                              } else {
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        title: Text("User not Authenticated"),
+                                        content: Text(
+                                            "You are required register with a valid email"),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text("Ok"))
+                                        ],
+                                      );
+                                    });
+                              }
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const LoginPage()));
-                            }).onError((error, stackTrace) {
-                              print("Error ${error.toString()}");
+                            }).catchError((error) {
+                              //Error occured when register
+                              String errorMessage = '';
+
+                              if(error is FirebaseAuthException){
+                                if(error.code == 'email-already-in-use'){
+                                  // Email is already registered
+                                  errorMessage = 'Email is already registered. Please use a different email.';
+                                }
+                              }
                             });
                           },
                           icon: Icon(
