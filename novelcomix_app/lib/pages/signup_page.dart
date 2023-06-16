@@ -91,21 +91,38 @@ class _SignUpPageState extends State<SignUpPage> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFF731942)),
                           onPressed: () {
+                            String username = _usernameTextController.text;
+                            String email = _emailTextController.text;
+                            String password = _passwordTextController.text;
+
+                            if (email.isEmpty ||
+                                password.isEmpty ||
+                                username.isEmpty) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Registration Failed'),
+                                  content: const Text('Please fill in all details.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the dialog
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              return; // Stop further execution
+                            }
+
                             //register new user with email and password
                             FirebaseAuth.instance
                                 .createUserWithEmailAndPassword(
                                     email: _emailTextController.text,
                                     password: _passwordTextController.text)
                                 .then((value) {
-                              //To notify the user account have created
-                              final snackbar = SnackBar(
-                                content: const Text("Yay, Account Created!"),
-                                action: SnackBarAction(
-                                    label: 'OK', onPressed: () {}),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackbar);
-
                               //Get current user
                               FirebaseAuth auth = FirebaseAuth.instance;
                               User? currentUser = auth.currentUser;
@@ -125,8 +142,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                     context: context,
                                     builder: (context) {
                                       return AlertDialog(
-                                        title: Text("User not Authenticated"),
-                                        content: Text(
+                                        title: const Text("User not Authenticated"),
+                                        content: const Text(
                                             "You are required register with a valid email"),
                                         actions: [
                                           TextButton(
@@ -139,26 +156,64 @@ class _SignUpPageState extends State<SignUpPage> {
                                     });
                               }
 
+                              //To notify the user account have created
+                              final snackbar = SnackBar(
+                                content: Text("Yay, Account Created!\nWelcome ${username}"),
+                                action: SnackBarAction(
+                                    label: 'OK', onPressed: () {}),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbar);
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const LoginPage()));
                             }).catchError((error) {
-                              //Error occured when register
+                              //Error occurred when register
                               String errorMessage = '';
 
-                              if(error is FirebaseAuthException){
-                                if(error.code == 'email-already-in-use'){
+                              if (error is FirebaseAuthException) {
+                                if (error.code == 'email-already-in-use') {
                                   // Email is already registered
-                                  errorMessage = 'Email is already registered. Please use a different email.';
+                                  errorMessage =
+                                      'Email is already registered. Please use a different email.';
+                                } else if (error.code == 'weak-password') {
+                                  // Weak Password entered
+                                  errorMessage =
+                                      'Password is too weak. Please use a different password.';
+                                } else if (error.code == 'invalid-email') {
+                                  // Invalid email entered
+                                  errorMessage = 'Please use a valid email.';
+                                } else {
+                                  // Other FirebaseAuthException errors
+                                  errorMessage = 'An Error Occurred\nError: ${error.code.toString()}';
                                 }
+                              } else {
+                                // Other errors
+                                errorMessage = error.code.toString();
                               }
+
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: const Text("Registration Failed"),
+                                        content: Text(errorMessage),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("OK"),
+                                          ),
+                                        ],
+                                      ));
                             });
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.check_circle,
                           ),
-                          label: Text(
+                          label: const Text(
                             'Sign Up',
                             style: TextStyle(
                               fontSize: 18,
@@ -176,7 +231,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             LoginPage.routeName,
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Already have an account? Click here.",
                           style: TextStyle(
                             color: Colors.blueAccent,

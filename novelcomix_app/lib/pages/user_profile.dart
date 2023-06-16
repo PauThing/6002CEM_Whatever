@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/design/widgets.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
-import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
 import 'package:novelcomix_app/widgets/textfieldWidget.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserProfile extends StatefulWidget {
   static String routeName = '/UserProfile';
+
   const UserProfile({Key? key}) : super(key: key);
 
   @override
@@ -14,12 +16,28 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  TextEditingController _fullnameTextController = TextEditingController();
+  TextEditingController _displaynameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
 
+  String username = '';
+
   @override
+
+  void fetchUsername() {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null){
+      String? fetchUsername = user.displayName;
+      if(fetchUsername != null && fetchUsername.isNotEmpty) {
+        setState(() {
+          username = fetchUsername;
+        });
+      }
+    }
+  }
+
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -42,19 +60,31 @@ class _UserProfileState extends State<UserProfile> {
                   child: Column(
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(top: 60, left: 30, right: 30,),
+                        padding: const EdgeInsets.only(
+                          top: 60,
+                          left: 30,
+                          right: 30,
+                        ),
                         child: Column(
                           children: [
                             Container(
-                              child: forTextField("Full Name", Icons.person_2,
-                                  false, _fullnameTextController),
+                              child: forTextField(
+                                  "Display Name",
+                                  Icons.person_2,
+                                  false,
+                                  _displaynameTextController),
                             ),
                             SizedBox(
                               height: 15,
                             ),
                             Container(
-                              child: forTextField("Username", Icons.person,
-                                  false, _usernameTextController),
+                              child: TextField(
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                  labelText: 'Username',
+                                ),
+                                controller: TextEditingController(text: username),
+                              ),
                             ),
                             SizedBox(
                               height: 15,
@@ -89,7 +119,7 @@ class _UserProfileState extends State<UserProfile> {
                                   //         password: _passwordTextController.text)
                                   //     .then((value) {
                                   //   final snackbar = SnackBar(
-                                  //     content: const Text("Yay, Account Created!"),
+                                  //     content: const Text("Yay, Account Updated!"),
                                   //     action: SnackBarAction(
                                   //         label: 'OK', onPressed: () {}),
                                   //   );
@@ -100,16 +130,16 @@ class _UserProfileState extends State<UserProfile> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const LoginPage()));
+                                          const LoginPage()));
                                   // }).onError((error, stackTrace) {
                                   //   print("Error ${error.toString()}");
                                   // });
                                 },
                                 icon: Icon(
-                                  Icons.check_circle,
+                                  Icons.security_update_good,
                                 ),
                                 label: Text(
-                                  'Sign Up',
+                                  'Update',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w900,
@@ -117,25 +147,8 @@ class _UserProfileState extends State<UserProfile> {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(
-                                  LoginPage.routeName,
-                                );
-                              },
-                              child: Text(
-                                "Already have an account? Click here.",
-                                style: TextStyle(
-                                  color: Colors.blueAccent,
-                                  fontSize: 15,
-                                  fontStyle: FontStyle.italic,
-                                  decoration: TextDecoration.underline,
-                                ),
-                              ),
-                            ),
+
+
                           ],
                         ),
                       ),
