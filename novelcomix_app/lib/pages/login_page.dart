@@ -64,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
 
                       //Login Button
                       Container(
+                        height: 45,
                         width: 250,
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(

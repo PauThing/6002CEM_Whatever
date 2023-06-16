@@ -24,37 +24,36 @@ class _SignUpPageState extends State<SignUpPage> {
       children: [
         BackgroundImage(),
         Scaffold(
-          extendBodyBehindAppBar: true,
-          appBar: AppBar(
-            backgroundColor: Color(0xFF731942).withOpacity(0.9),
-            elevation: 0,
-            title: Text(
-              "Sign Up",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: Container(
-                    height: 200,
-                    child: Center(
-                      child: Text(
-                        'NovelComix',
-                        style: signinTitle,
+                  padding: const EdgeInsets.only(top: 125),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 80,
+                        child: Center(
+                          child: Text(
+                            'NovelComix',
+                            style: signinTitle,
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        child: Center(
+                          child: Text(
+                            'Sign Up',
+                            style: signupTitle,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 80,
                 ),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -85,6 +84,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       //Sign Up Button
                       Container(
+                        height: 45,
                         width: 250,
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
@@ -95,10 +95,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                     email: _emailTextController.text,
                                     password: _passwordTextController.text)
                                 .then((value) {
-                                  final snackbar = SnackBar(
-                                    content: const Text("Yay, Account Created!"),
-                                  action: SnackBarAction(label: 'OK', onPressed: (){}),);
-                                  ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                              final snackbar = SnackBar(
+                                content: const Text("Yay, Account Created!"),
+                                action: SnackBarAction(
+                                    label: 'OK', onPressed: () {}),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbar);
 
                               Navigator.push(
                                   context,
@@ -118,7 +121,26 @@ class _SignUpPageState extends State<SignUpPage> {
                               fontWeight: FontWeight.w900,
                             ),
                           ),
-                        ), //Need to add button
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            LoginPage.routeName,
+                          );
+                        },
+                        child: Text(
+                          "Already have an account? Click here.",
+                          style: TextStyle(
+                            color: Colors.blueAccent,
+                            fontSize: 15,
+                            fontStyle: FontStyle.italic,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
                       ),
                     ],
                   ),

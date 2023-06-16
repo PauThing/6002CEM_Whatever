@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         automaticallyImplyLeading: false, //disable back button
         title: Text(
-          "Welcome to NovelComix",
+          "NovelComix",
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
