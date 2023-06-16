@@ -27,6 +27,12 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ),
           ),
+
+          body: Column(
+            children: [
+
+            ],
+          ),
         ),
       ],
     );
