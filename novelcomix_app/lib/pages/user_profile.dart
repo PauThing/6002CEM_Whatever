@@ -21,24 +21,10 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
 
-  String username = 'asdw';
-
   @override
-  void fetchUsername() {
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null){
-      String? fetchUsername = user.displayName;
-      if(fetchUsername != null && fetchUsername.isNotEmpty) {
-        setState(() {
-          username = fetchUsername;
-        });
-      }
-    }
-  }
-
   Widget build(BuildContext context) {
-    fetchUsername();
+    final user = FirebaseAuth.instance.currentUser!;
+    String email = user.email!;
 
     return Stack(
       children: [
@@ -79,15 +65,8 @@ class _UserProfileState extends State<UserProfile> {
                               height: 15,
                             ),
                             Container(
-                              child: TextField(
-                                readOnly: true,
-                                decoration: InputDecoration(
-                                  labelText: 'Username',
-                                ),
-                                controller:
-                                    TextEditingController(text: username),
-                              ),
-                            ),
+                                child: forReadTextField(
+                                    "Username", Icons.person_2, false, email)),
                             SizedBox(
                               height: 15,
                             ),
@@ -114,10 +93,7 @@ class _UserProfileState extends State<UserProfile> {
                               child: ElevatedButton.icon(
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xFF731942)),
-                                onPressed: () {
-
-
-                                },
+                                onPressed: () {},
                                 icon: Icon(
                                   Icons.security_update_good,
                                 ),
