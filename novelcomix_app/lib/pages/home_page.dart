@@ -30,7 +30,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
 
-  Function() refreshUI;
+  // Function() refreshUI;
 
   List screens = [Home(), BookmarkPage(), ComicPage(), NovelPage()];
 
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(right: 5.0),
                 child: InkWell(
                   onTap: () {
-                    // Navigator.of(context).pushNamed(UserProfile.routeName);
+                    Navigator.of(context).pushNamed(UserProfile.routeName);
                   },
                   child: const CircleAvatar(
                     backgroundImage: AssetImage("assets/profile.png"),
@@ -161,7 +161,7 @@ class Home extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ComicDetailPage(refreshUI: refreshUI),
+                                builder: (context) => ComicDetailPage(refreshUI: () {  },),
                               ),
                             );
                           },

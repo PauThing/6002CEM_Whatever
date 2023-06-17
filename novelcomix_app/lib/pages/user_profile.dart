@@ -16,10 +16,10 @@ class UserProfile extends StatefulWidget {
 
 class _UserProfileState extends State<UserProfile> {
   TextEditingController _usernameTextController = TextEditingController();
-  TextEditingController _genderTextController = TextEditingController();
-
   late String _username = '';
   late String _email = '';
+  late String _gender = '';
+  late String _selectedGender = '';
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -34,30 +34,20 @@ class _UserProfileState extends State<UserProfile> {
     try {
       final uid = _auth.currentUser?.uid;
       if (uid != null) {
-        final userQuerySnapshot = await FirebaseFirestore.instance
+        final userSnapshot = await FirebaseFirestore.instance
             .collection('users')
             .where('uid', isEqualTo: uid)
             .limit(1)
             .get();
-
-        if (userQuerySnapshot.docs.isNotEmpty) {
-          final userDoc = userQuerySnapshot.docs.first;
-          final userRef = FirebaseFirestore.instance
-              .collection('users')
-              .doc(userDoc.id);
-
-          await userRef.update({
-            'username': _usernameTextController.text,
-            'gender': _genderTextController.text,
+        if (userSnapshot.docs.isNotEmpty) {
+          final userData = userSnapshot.docs.first.data();
+          setState(() {
+            _username = userData['username'] ?? '';
+            _email = userData['email'] ?? '';
+            _gender = userData['gender'] ?? '';
+            _usernameTextController.text = _username;
+            _selectedGender = _gender;
           });
-
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User data updated successfully')),
-          );
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User not found')),
-          );
         }
       }
     } catch (error) {
@@ -69,16 +59,30 @@ class _UserProfileState extends State<UserProfile> {
     try {
       final uid = _auth.currentUser?.uid;
       if (uid != null) {
-        final userRef = FirebaseFirestore.instance.collection('users').doc(uid);
+        final userQuerySnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: uid)
+            .limit(1)
+            .get();
 
-        await userRef.update({
-          'username': _usernameTextController.text,
-          'gender': _genderTextController.text,
-        });
+        if (userQuerySnapshot.docs.isNotEmpty) {
+          final userDoc = userQuerySnapshot.docs.first;
+          final userRef =
+          FirebaseFirestore.instance.collection('users').doc(userDoc.id);
 
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('User data updated successfully')),
-        );
+          await userRef.update({
+            'username': _usernameTextController.text,
+            'gender': _selectedGender,
+          });
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('User data updated successfully')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('User not found')),
+          );
+        }
       }
     } catch (error) {
       print('Error updating user data: $error');
@@ -119,23 +123,78 @@ class _UserProfileState extends State<UserProfile> {
               child: Column(
                 children: [
                   Container(
-                    child: forReadTextField(
-                        "Username", Icons.person, false, false, _username),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    child: forReadTextField(
-                        "Email", Icons.email, false, true, _email),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Container(
                     child: forTextField(
-                        "Gender", Icons.transgender, false, _genderTextController),
+                      "Username",
+                      Icons.person,
+                      false,
+                      _usernameTextController,
+                    ),
                   ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: forReadTextField(
+                      "Email",
+                      Icons.email,
+                      false,
+                      true,
+                      _email,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  if (_gender == '')
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Gender',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                value: 'Male',
+                                groupValue: _selectedGender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedGender = value!;
+                                  });
+                                },
+                              ),
+                              Text('Male'),
+                              Radio<String>(
+                                value: 'Female',
+                                groupValue: _selectedGender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    _selectedGender = value!;
+                                  });
+                                },
+                              ),
+                              Text('Female'),
+                            ],
+                          ),
+                        ],
+                      ),
+                    )
+                  else
+                    Container(
+                      child: forReadTextField(
+                        "Gender",
+                        Icons.transgender,
+                        false,
+                        true,
+                        _gender,
+                      ),
+                    ),
                   SizedBox(
                     height: 80,
                   ),
@@ -144,7 +203,8 @@ class _UserProfileState extends State<UserProfile> {
                     width: 250,
                     child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF731942)),
+                        backgroundColor: Color(0xFF731942),
+                      ),
                       onPressed: () {
                         updateUserData();
                       },
