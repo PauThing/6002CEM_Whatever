@@ -124,7 +124,12 @@ class _HomePageState extends State<HomePage> {
 }
 
 //Home
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final ongoingComics = comicList.where((comic) => comic.status == 'Ongoing').toList();
   final ongoingNovels = novelList.where((novel) => novel.status == 'Ongoing').toList();
 
@@ -158,12 +163,7 @@ class Home extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             // Navigate to the NovelPage when the image is clicked
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ComicDetailPage(refreshUI: () {  },),
-                              ),
-                            );
+
                           },
                           child: Container(
                             width: 210,

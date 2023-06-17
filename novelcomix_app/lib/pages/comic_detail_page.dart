@@ -4,6 +4,7 @@ import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:collection/collection.dart';
 
 class ComicDetailPage extends StatelessWidget {
+
   static String routeName = '/comicDetailPage';
 
   Function() refreshUI;

@@ -3,6 +3,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:novelcomix_app/data/comic.dart';
 import 'package:novelcomix_app/pages/bookmark_page.dart';
 import 'package:novelcomix_app/pages/comic_detail_page.dart';
 import 'package:novelcomix_app/pages/comic_list_page.dart';
@@ -58,7 +59,7 @@ class _MyAppState extends State<MyApp> {
         NovelBookmarkPage.routeName: (context) => NovelBookmarkPage(),
         ComicPage.routeName: (context) => ComicPage(),
         ComicListPage.routeName: (context) => ComicListPage(),
-        ComicDetailPage.routeName: (context) => ComicDetailPage(refreshUI: refresh,),
+        ComicDetailPage.routeName: (context) => ComicDetailPage(refreshUI: () {  },),
         NovelPage.routeName: (context) => NovelPage(),
         NovelListPage.routeName: (context) => NovelListPage(),
         NovelDetailPage.routeName: (context) => NovelDetailPage(refreshUI: refresh,),
