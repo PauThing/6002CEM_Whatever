@@ -1,18 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/font_style.dart';
+import 'package:novelcomix_app/models/comic_model.dart';
+import 'package:novelcomix_app/models/novel_model.dart';
 import 'package:novelcomix_app/pages/bookmark_page.dart';
+import 'package:novelcomix_app/pages/comic_list_page.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
 import 'package:novelcomix_app/design/widgets.dart';
 import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
+import 'package:novelcomix_app/data/comic.dart';
+import 'package:novelcomix_app/data/novel.dart';
 
 class HomePage extends StatefulWidget {
+  final List<ComicModel> comicList;
+  final List<NovelModel> novelList;
+
   static String routeName = '/HomePage';
 
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.comicList, required this.novelList}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -114,6 +122,9 @@ class _HomePageState extends State<HomePage> {
 
 //Home
 class Home extends StatelessWidget {
+  // final ongoingComics = comicList.where((comic) => comic.status == 'Ongoing').toList();
+  // final ongoingNovels = novelList.where((novel) => novel.status == 'Ongoing').toList();
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -127,8 +138,46 @@ class Home extends StatelessWidget {
                 children: [
                   Container(
                     child: Text(
-                      "Comics",
+                      "Ongoing Comics",
                       style: homepageText,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 330,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: comicList.length,
+                      itemBuilder: (context, index) {
+                        ComicModel comic = comicList[index];
+                        return Container(
+                          width: 210,
+                          child: ListTile(
+                            title: Column(
+                              children: [
+                                AspectRatio(
+                                    aspectRatio: 2/3,
+                                    child: Image.network(
+                                        comic.imageUrl,
+                                        fit: BoxFit.cover,
+                                    ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  comic.title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(
@@ -142,8 +191,46 @@ class Home extends StatelessWidget {
                   ),
                   Container(
                     child: Text(
-                      "Novels",
+                      "Ongoing Novels",
                       style: homepageText,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 330,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: novelList.length,
+                      itemBuilder: (context, index) {
+                        NovelModel novel = novelList[index];
+                        return Container(
+                          width: 210,
+                          child: ListTile(
+                            title: Column(
+                              children: [
+                                AspectRatio(
+                                  aspectRatio: 2/3,
+                                  child: Image.network(
+                                    novel.imageUrl,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                SizedBox(height: 8),
+                                Text(
+                                  novel.title,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

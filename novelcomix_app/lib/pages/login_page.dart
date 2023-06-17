@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage()));
+                                      builder: (context) => HomePage(comicList: [], novelList: [],)));
                             }).onError((error, stackTrace) {
                               final snackbar = SnackBar(
                                 content: const Text("Sorry, Invalid Email or Password.."),

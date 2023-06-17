@@ -189,8 +189,53 @@ class _UserProfileState extends State<UserProfile> {
                                   ],
                                 ),
                               ),
+<<<<<<< Updated upstream
                             ],
                           ),
+=======
+                              controller: _usernameTextController,
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              child: forReadTextField(
+                                  "Email", Icons.email, false, _useremail),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Container(
+                              child: forTextField("Password", Icons.lock, true,
+                                  _passwordTextController),
+                            ),
+
+                            SizedBox(
+                              height: 80,
+                            ),
+
+                            //Sign Up Button
+                            Container(
+                              height: 45,
+                              width: 250,
+                              child: ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF731942)),
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.security_update_good,
+                                ),
+                                label: Text(
+                                  'Update',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+>>>>>>> Stashed changes
                         ),
                       ],
                     ),
