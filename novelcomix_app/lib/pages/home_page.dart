@@ -4,6 +4,7 @@ import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/models/novel_model.dart';
 import 'package:novelcomix_app/pages/bookmark_page.dart';
+import 'package:novelcomix_app/pages/comic_detail_page.dart';
 import 'package:novelcomix_app/pages/comic_list_page.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
@@ -28,6 +29,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+
+  Function() refreshUI;
 
   List screens = [Home(), BookmarkPage(), ComicPage(), NovelPage()];
 
@@ -68,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.only(right: 5.0),
                 child: InkWell(
                   onTap: () {
-                    Navigator.of(context).pushNamed(UserProfile.routeName);
+                    // Navigator.of(context).pushNamed(UserProfile.routeName);
                   },
                   child: const CircleAvatar(
                     backgroundImage: AssetImage("assets/profile.png"),
@@ -152,28 +155,39 @@ class Home extends StatelessWidget {
                       itemCount: ongoingComics.length,
                       itemBuilder: (context, index) {
                         ComicModel comic = ongoingComics[index];
-                        return Container(
-                          width: 210,
-                          child: ListTile(
-                            title: Column(
-                              children: [
-                                AspectRatio(
-                                    aspectRatio: 2/3,
-                                    child: Image.network(
-                                        comic.imageUrl,
-                                        fit: BoxFit.cover,
-                                    ),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  comic.title,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                        return GestureDetector(
+                          onTap: () {
+                            // Navigate to the NovelPage when the image is clicked
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ComicDetailPage(refreshUI: refreshUI),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 210,
+                            child: ListTile(
+                              title: Column(
+                                children: [
+                                  AspectRatio(
+                                      aspectRatio: 2/3,
+                                      child: Image.network(
+                                          comic.imageUrl,
+                                          fit: BoxFit.cover,
+                                      ),
                                   ),
-                                ),
-                              ],
+                                  SizedBox(height: 8),
+                                  Text(
+                                    comic.title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );
