@@ -52,7 +52,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         LoginPage.routeName: (context) => const LoginPage(),
         HomePage.routeName: (context) => HomePage(comicList: [], novelList: [],),
-        // UserProfile.routeName: (context) => UserProfile(),
+        UserProfile.routeName: (context) => UserProfile(),
         BookmarkPage.routeName: (context) => BookmarkPage(),
         ComicBookmarkPage.routeName: (context) => ComicBookmarkPage(),
         NovelBookmarkPage.routeName: (context) => NovelBookmarkPage(),

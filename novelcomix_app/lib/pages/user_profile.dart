@@ -34,17 +34,30 @@ class _UserProfileState extends State<UserProfile> {
     try {
       final uid = _auth.currentUser?.uid;
       if (uid != null) {
-        final userSnapshot = await FirebaseFirestore.instance
+        final userQuerySnapshot = await FirebaseFirestore.instance
             .collection('users')
             .where('uid', isEqualTo: uid)
             .limit(1)
             .get();
-        if (userSnapshot.docs.isNotEmpty) {
-          final userData = userSnapshot.docs.first.data();
-          setState(() {
-            _username = userData['username'] ?? '';
-            _email = userData['email'] ?? '';
+
+        if (userQuerySnapshot.docs.isNotEmpty) {
+          final userDoc = userQuerySnapshot.docs.first;
+          final userRef = FirebaseFirestore.instance
+              .collection('users')
+              .doc(userDoc.id);
+
+          await userRef.update({
+            'username': _usernameTextController.text,
+            'gender': _genderTextController.text,
           });
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('User data updated successfully')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('User not found')),
+          );
         }
       }
     } catch (error) {
