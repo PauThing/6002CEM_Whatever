@@ -24,7 +24,7 @@ class _UserProfileState extends State<UserProfile> {
   final currentUser = FirebaseAuth.instance.currentUser!;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  //String _uid = '';
+  String _uid = '';
   String _useremail = '';
   String _username = '';
 
@@ -34,34 +34,34 @@ class _UserProfileState extends State<UserProfile> {
     Navigator.of(context).pushNamed(LoginPage.routeName);
   }
 
-  // void getUserDetail() async {
-  //   //User? user = _auth.currentUser;
-  //   if (user != null) {
-  //     //_uid = user.uid;
-  //     final DocumentSnapshot<Map<String, dynamic>> userDetail =
-  //         await FirebaseFirestore.instance.collection('users').doc(_uid).get();
-  //
-  //     setState(() {
-  //       _username = userDetail.get('username');
-  //       _useremail = userDetail.get('email');
-  //
-  //       //_usernameTextController.text = _username;
-  //       _emailTextController.text = _useremail;
-  //     });
-  //   } else {
-  //     signOut();
-  //   }
-  // }
+  void getUserDetail() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      //_uid = user.uid;
+      final DocumentSnapshot<Map<String, dynamic>> userDetail =
+          await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+
+      setState(() {
+        _username = userDetail.get('username');
+        _useremail = userDetail.get('email');
+
+        //_usernameTextController.text = _username;
+        _emailTextController.text = _useremail;
+      });
+    } else {
+      signOut();
+    }
+  }
 
   @override
-  // void initState() {
-  //   super.initState();
-  //   getUserDetail();
-  // }
+  void initState() {
+    super.initState();
+    getUserDetail();
+  }
 
   Widget build(BuildContext context) {
-    // final user = FirebaseAuth.instance.currentUser!;
-    // String email = user.email!;
+    final user = FirebaseAuth.instance.currentUser!;
+    String email = user.email!;
 
     return Stack(
       children: [
@@ -116,11 +116,11 @@ class _UserProfileState extends State<UserProfile> {
                                       height: 15,
                                     ),
                                     Container(
-                                        // TextBox1(
-                                        //   text: userData['username'],
-                                        //   sectionName: 'Username',
-                                        //   onPressed: () => editField('username'),
-                                        // ),
+                                      child: forTextField(
+                                          "Full Name",
+                                          Icons.person_2,
+                                          false,
+                                          _usernameTextController),
                                         ),
                                     // TextFormField(
                                     //   readOnly: true,
