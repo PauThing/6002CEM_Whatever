@@ -28,7 +28,7 @@ TextField forTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-TextField forReadTextField(String text, IconData icon, bool isPasswordType, String email) {
+TextField forReadTextField(String text, IconData icon, bool isPasswordType, String detail) {
   return TextField(
     readOnly: true,
     obscureText: isPasswordType,
@@ -48,7 +48,7 @@ TextField forReadTextField(String text, IconData icon, bool isPasswordType, Stri
         borderSide: const BorderSide(width: 0, style: BorderStyle.none),
       ),
     ),
-    controller: TextEditingController(text: email),
+    controller: TextEditingController(text: detail),
     keyboardType: isPasswordType
         ? TextInputType.visiblePassword
         : TextInputType.emailAddress,

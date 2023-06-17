@@ -41,13 +41,7 @@ class _UserProfileState extends State<UserProfile> {
       final DocumentSnapshot<Map<String, dynamic>> userDetail =
           await FirebaseFirestore.instance.collection('users').doc(_uid).get();
 
-      setState(() {
-        _username = userDetail.get('username');
-        _useremail = userDetail.get('email');
 
-        _usernameTextController.text = _username;
-        _emailTextController.text = _useremail;
-      });
     } else {
       signOut();
     }
@@ -61,7 +55,7 @@ class _UserProfileState extends State<UserProfile> {
 
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
-    String email = user.email!;
+    String userEmail = user.email!;
 
     return Stack(
       children: [
@@ -98,37 +92,22 @@ class _UserProfileState extends State<UserProfile> {
                             SizedBox(
                               height: 15,
                             ),
-                            TextFormField(
-                              readOnly: true,
-                              initialValue: _username,
-                              style: TextStyle(color: Colors.black87),
-                              decoration: InputDecoration(
-                                prefixIcon: Icon(
-                                  Icons.person,
-                                  color: Colors.black26,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(15.0),
-                                  borderSide: const BorderSide(
-                                    width: 0,
-                                    style: BorderStyle.none,
-                                  ),
-                                ),
-                              ),
-                              controller: _usernameController,
+                            Container(
+                              child: forReadTextField(
+                                  "Email", Icons.email, false, _username),
                             ),
                             SizedBox(
                               height: 15,
                             ),
                             Container(
                               child: forReadTextField(
-                                  "Email", Icons.email, false, _useremail),
+                                  "Email", Icons.email, false, userEmail),
                             ),
                             SizedBox(
                               height: 15,
                             ),
                             Container(
-                              child: forTextField("Password", Icons.lock, true,
+                              child: forTextField("Password", Icons.lock, false,
                                   _passwordTextController),
                             ),
 
