@@ -122,8 +122,8 @@ class _HomePageState extends State<HomePage> {
 
 //Home
 class Home extends StatelessWidget {
-  // final ongoingComics = comicList.where((comic) => comic.status == 'Ongoing').toList();
-  // final ongoingNovels = novelList.where((novel) => novel.status == 'Ongoing').toList();
+  final ongoingComics = comicList.where((comic) => comic.status == 'Ongoing').toList();
+  final ongoingNovels = novelList.where((novel) => novel.status == 'Ongoing').toList();
 
   @override
   Widget build(BuildContext context) {
@@ -149,9 +149,9 @@ class Home extends StatelessWidget {
                     height: 330,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: comicList.length,
+                      itemCount: ongoingComics.length,
                       itemBuilder: (context, index) {
-                        ComicModel comic = comicList[index];
+                        ComicModel comic = ongoingComics[index];
                         return Container(
                           width: 210,
                           child: ListTile(
@@ -202,9 +202,9 @@ class Home extends StatelessWidget {
                     height: 330,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: novelList.length,
+                      itemCount: ongoingNovels.length,
                       itemBuilder: (context, index) {
-                        NovelModel novel = novelList[index];
+                        NovelModel novel = ongoingNovels[index];
                         return Container(
                           width: 210,
                           child: ListTile(
