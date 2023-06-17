@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/design/widgets.dart';
-import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/widgets/textfieldWidget.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'login_page.dart';
 
 class UserProfile extends StatefulWidget {
   static String routeName = '/UserProfile';
@@ -21,7 +23,42 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _uid = '';
+  String _useremail = '';
+  String _username = '';
+
+  //signout function
+  signOut() async {
+    await _auth.signOut();
+    Navigator.of(context).pushNamed(LoginPage.routeName);
+  }
+
+  void getUserDetail() async {
+    User? user = _auth.currentUser;
+    if (user != null) {
+      _uid = user.uid;
+      final DocumentSnapshot<Map<String, dynamic>> userDetail =
+          await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+
+      setState(() {
+        _username = userDetail.get('username');
+        _useremail = userDetail.get('email');
+
+        _usernameTextController.text = _username;
+        _emailTextController.text = _useremail;
+      });
+    } else {
+      signOut();
+    }
+  }
+
   @override
+  void initState() {
+    super.initState();
+    getUserDetail();
+  }
+
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!;
     String email = user.email!;
@@ -55,24 +92,37 @@ class _UserProfileState extends State<UserProfile> {
                         child: Column(
                           children: [
                             Container(
-                              child: forTextField(
-                                  "Full Name",
-                                  Icons.person_2,
-                                  false,
-                                  _displaynameTextController),
+                              child: forTextField("Full Name", Icons.person_2,
+                                  false, _displaynameTextController),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            TextFormField(
+                              readOnly: true,
+                              initialValue: _username,
+                              style: TextStyle(color: Colors.black87),
+                              decoration: InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  color: Colors.black26,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                  borderSide: const BorderSide(
+                                    width: 0,
+                                    style: BorderStyle.none,
+                                  ),
+                                ),
+                              ),
+                              controller: _usernameController,
                             ),
                             SizedBox(
                               height: 15,
                             ),
                             Container(
-                                child: forTextField(
-                                    "Username", Icons.person_2, false, _usernameTextController)),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Container(
-                              child: forReadTextField("Email", Icons.email, false,
-                                  email),
+                              child: forReadTextField(
+                                  "Email", Icons.email, false, _useremail),
                             ),
                             SizedBox(
                               height: 15,
