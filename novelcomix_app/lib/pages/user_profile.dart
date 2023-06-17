@@ -56,7 +56,7 @@ class _UserProfileState extends State<UserProfile> {
                           children: [
                             Container(
                               child: forTextField(
-                                  "Display Name",
+                                  "Full Name",
                                   Icons.person_2,
                                   false,
                                   _displaynameTextController),
@@ -65,14 +65,14 @@ class _UserProfileState extends State<UserProfile> {
                               height: 15,
                             ),
                             Container(
-                                child: forReadTextField(
-                                    "Username", Icons.person_2, false, email)),
+                                child: forTextField(
+                                    "Username", Icons.person_2, false, _usernameTextController)),
                             SizedBox(
                               height: 15,
                             ),
                             Container(
-                              child: forTextField("Email", Icons.email, false,
-                                  _emailTextController),
+                              child: forReadTextField("Email", Icons.email, false,
+                                  email),
                             ),
                             SizedBox(
                               height: 15,
