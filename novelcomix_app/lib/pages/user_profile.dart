@@ -35,7 +35,7 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   void getUserDetail() async {
-    User? user = _auth.currentUser;
+    //User? user = _auth.currentUser;
     if (user != null) {
       //_uid = user.uid;
       final DocumentSnapshot<Map<String, dynamic>> userDetail =
@@ -45,7 +45,7 @@ class _UserProfileState extends State<UserProfile> {
         _username = userDetail.get('username');
         _useremail = userDetail.get('email');
 
-        _usernameTextController.text = _username;
+        //_usernameTextController.text = _username;
         _emailTextController.text = _useremail;
       });
     } else {
@@ -122,25 +122,25 @@ class _UserProfileState extends State<UserProfile> {
                                           false,
                                           _usernameTextController),
                                         ),
-                                    TextFormField(
-                                      readOnly: true,
-                                      //initialValue: _username,
-                                      style: TextStyle(color: Colors.black87),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Icon(
-                                          Icons.person,
-                                          color: Colors.black26,
-                                        ),
-                                        border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(15.0),
-                                          borderSide: const BorderSide(
-                                            width: 0,
-                                            style: BorderStyle.none,
-                                          ),
-                                        ),
-                                      ),
-                                      controller: _usernameTextController,
-                                    ),
+                                    // TextFormField(
+                                    //   readOnly: true,
+                                    //   //initialValue: _username,
+                                    //   style: TextStyle(color: Colors.black87),
+                                    //   decoration: InputDecoration(
+                                    //     prefixIcon: Icon(
+                                    //       Icons.person,
+                                    //       color: Colors.black26,
+                                    //     ),
+                                    //     border: OutlineInputBorder(
+                                    //       borderRadius: BorderRadius.circular(15.0),
+                                    //       borderSide: const BorderSide(
+                                    //         width: 0,
+                                    //         style: BorderStyle.none,
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    //   controller: _usernameTextController,
+                                    // ),
                                     SizedBox(
                                       height: 15,
                                     ),
