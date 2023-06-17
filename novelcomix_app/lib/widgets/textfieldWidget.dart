@@ -28,9 +28,9 @@ TextField forTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-TextField forReadTextField(String text, IconData icon, bool isPasswordType, String detail) {
+TextField forReadTextField(String text, IconData icon, bool isPasswordType, bool isWriteType, String detail) {
   return TextField(
-    readOnly: true,
+    readOnly: isWriteType,
     obscureText: isPasswordType,
     cursorColor: Colors.black12,
     style: TextStyle(color: Colors.black87),

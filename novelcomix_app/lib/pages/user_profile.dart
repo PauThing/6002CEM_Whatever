@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:novelcomix_app/design/widgets.dart';
-import 'package:novelcomix_app/widgets/textfieldWidget.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../design/background_image.dart';
+import '../widgets/textfieldWidget.dart';
 import 'login_page.dart';
 
 class UserProfile extends StatefulWidget {
@@ -16,56 +15,81 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
-  TextEditingController _displaynameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
-  TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _genderTextController = TextEditingController();
 
-  final currentUser = FirebaseAuth.instance.currentUser!;
+  late String _username = '';
+  late String _email = '';
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  String _uid = '';
-  String _useremail = '';
-  String _username = '';
 
-  //signout function
-  signOut() async {
+  // Sign out function
+  Future<void> signOut() async {
     await _auth.signOut();
     Navigator.of(context).pushNamed(LoginPage.routeName);
   }
 
-  void getUserDetail() async {
-    //User? user = _auth.currentUser;
-    if (user != null) {
-      //_uid = user.uid;
-      final DocumentSnapshot<Map<String, dynamic>> userDetail =
-          await FirebaseFirestore.instance.collection('users').doc(_uid).get();
+  // Fetch user data from Firestore
+  Future fetchUserData() async {
+    try {
+      final uid = _auth.currentUser?.uid;
+      if (uid != null) {
+        final userSnapshot = await FirebaseFirestore.instance
+            .collection('users')
+            .where('uid', isEqualTo: uid)
+            .limit(1)
+            .get();
+        if (userSnapshot.docs.isNotEmpty) {
+          final userData = userSnapshot.docs.first.data();
+          setState(() {
+            _username = userData['username'] ?? '';
+            _email = userData['email'] ?? '';
+          });
+        }
+      }
+    } catch (error) {
+      print('Error fetching user data: $error');
+    }
+  }
 
-      setState(() {
-        _username = userDetail.get('username');
-        _useremail = userDetail.get('email');
+  Future<void> updateUserData() async {
+    try {
+      final uid = _auth.currentUser?.uid;
+      if (uid != null) {
+        final userRef = FirebaseFirestore.instance.collection('users').doc(uid);
 
-        //_usernameTextController.text = _username;
-        _emailTextController.text = _useremail;
-      });
-    } else {
-      signOut();
+        await userRef.update({
+          'username': _usernameTextController.text,
+          'gender': _genderTextController.text,
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('User data updated successfully')),
+        );
+      }
+    } catch (error) {
+      print('Error updating user data: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to update user data')),
+      );
     }
   }
 
   @override
   void initState() {
     super.initState();
-    getUserDetail();
+    fetchUserData();
   }
 
+  @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser!;
-    String email = user.email!;
+    if (_username == null || _email == null) {
+      return Center(child: CircularProgressIndicator());
+    }
 
     return Stack(
       children: [
-        BackgroundImage(),
+        const BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
@@ -76,181 +100,56 @@ class _UserProfileState extends State<UserProfile> {
               ),
             ),
           ),
-          body: StreamBuilder<DocumentSnapshot>(
-            stream: FirebaseFirestore.instance
-                .collection('users')
-                .doc(currentUser.uid)
-                .snapshots(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final userData = snapshot.data!.data();
-                if (userData != null) {
-                  final userDataMap = userData as Map<String, dynamic>;
-
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.only(
-                                  top: 60,
-                                  left: 30,
-                                  right: 30,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Text(
-                                      currentUser.email!,
-                                    ),
-                                    Container(
-                                      child: forTextField(
-                                          "Full Name",
-                                          Icons.person_2,
-                                          false,
-                                          _displaynameTextController),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Container(
-                                      child: forTextField(
-                                          "Full Name",
-                                          Icons.person_2,
-                                          false,
-                                          _usernameTextController),
-                                        ),
-                                    // TextFormField(
-                                    //   readOnly: true,
-                                    //   //initialValue: _username,
-                                    //   style: TextStyle(color: Colors.black87),
-                                    //   decoration: InputDecoration(
-                                    //     prefixIcon: Icon(
-                                    //       Icons.person,
-                                    //       color: Colors.black26,
-                                    //     ),
-                                    //     border: OutlineInputBorder(
-                                    //       borderRadius: BorderRadius.circular(15.0),
-                                    //       borderSide: const BorderSide(
-                                    //         width: 0,
-                                    //         style: BorderStyle.none,
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    //   controller: _usernameTextController,
-                                    // ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Container(
-                                      child: forReadTextField(
-                                          "Email",
-                                          Icons.email,
-                                          false,
-                                          userDataMap['email']),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Container(
-                                      child: forTextField(
-                                          "Password",
-                                          Icons.lock,
-                                          true,
-                                          _passwordTextController),
-                                    ),
-
-                                    SizedBox(
-                                      height: 80,
-                                    ),
-
-                                    //Sign Up Button
-                                    Container(
-                                      height: 45,
-                                      width: 250,
-                                      child: ElevatedButton.icon(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: Color(0xFF731942)),
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.security_update_good,
-                                        ),
-                                        label: Text(
-                                          'Update',
-                                          style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w900,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-<<<<<<< Updated upstream
-                            ],
-                          ),
-=======
-                              controller: _usernameTextController,
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Container(
-                              child: forReadTextField(
-                                  "Email", Icons.email, false, _useremail),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Container(
-                              child: forTextField("Password", Icons.lock, true,
-                                  _passwordTextController),
-                            ),
-
-                            SizedBox(
-                              height: 80,
-                            ),
-
-                            //Sign Up Button
-                            Container(
-                              height: 45,
-                              width: 250,
-                              child: ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFF731942)),
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.security_update_good,
-                                ),
-                                label: Text(
-                                  'Update',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
->>>>>>> Stashed changes
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Container(
+                    child: forReadTextField(
+                        "Username", Icons.person, false, false, _username),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: forReadTextField(
+                        "Email", Icons.email, false, true, _email),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: forTextField(
+                        "Gender", Icons.transgender, false, _genderTextController),
+                  ),
+                  SizedBox(
+                    height: 80,
+                  ),
+                  Container(
+                    height: 45,
+                    width: 250,
+                    child: ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFF731942)),
+                      onPressed: () {
+                        updateUserData();
+                      },
+                      icon: const Icon(
+                        Icons.system_update_alt,
+                      ),
+                      label: const Text(
+                        'Update',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w900,
                         ),
-                      ],
+                      ),
                     ),
-                  );
-                }
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text('Error ${snapshot.error}'),
-                );
-              }
-
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            },
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ],
