@@ -19,7 +19,7 @@ import 'package:novelcomix_app/widgets/novel_bookmark.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();             //ensure Firebase initialised before app run
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {

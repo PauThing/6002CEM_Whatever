@@ -1,6 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/font_style.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
@@ -18,6 +17,26 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _usernameTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
+  TextEditingController _confirmTextController = TextEditingController();
+
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  bool passwordConfirmed() {
+    if (_passwordTextController.text.trim() ==
+        _confirmTextController.text.trim()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future addDetails(String uid, String username, String email) async {
+    await FirebaseFirestore.instance.collection('users').add({
+      'uid': uid,
+      'username': username,
+      'email': email,
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +97,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         child: forTextField("Password", Icons.lock, true,
                             _passwordTextController),
                       ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        child: forTextField("Confirm Password", Icons.lock,
+                            true, _confirmTextController),
+                      ),
 
                       SizedBox(
                         height: 80,
@@ -102,7 +128,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 context: context,
                                 builder: (context) => AlertDialog(
                                   title: const Text('Registration Failed'),
-                                  content: const Text('Please fill in all details.'),
+                                  content:
+                                      const Text('Please fill in all details.'),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
@@ -115,6 +142,25 @@ class _SignUpPageState extends State<SignUpPage> {
                                 ),
                               );
                               return; // Stop further execution
+                            } else if (!passwordConfirmed()) {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Ensure your password'),
+                                  content: const Text(
+                                      'Please make sure the password and confirm password are the same.'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(
+                                            context); // Close the dialog
+                                      },
+                                      child: Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                              return;
                             }
 
                             //register new user with email and password
@@ -122,43 +168,15 @@ class _SignUpPageState extends State<SignUpPage> {
                                 .createUserWithEmailAndPassword(
                                     email: _emailTextController.text,
                                     password: _passwordTextController.text)
-                                .then((value) {
-                              //Get current user
-                              FirebaseAuth auth = FirebaseAuth.instance;
-                              User? currentUser = auth.currentUser;
-
-                              if (currentUser != null) {
-                                String uid = currentUser.uid;
-                                DatabaseReference userRef = FirebaseDatabase
-                                    .instance
-                                    .reference()
-                                    .child('users')
-                                    .child(uid);
-                                userRef
-                                    .child('username')
-                                    .set(_usernameTextController.text);
-                              } else {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text("User not Authenticated"),
-                                        content: const Text(
-                                            "You are required register with a valid email"),
-                                        actions: [
-                                          TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text("Ok"))
-                                        ],
-                                      );
-                                    });
-                              }
+                                .then((userCredential) {
+                              String uid = userCredential.user!.uid;
+                              addDetails(uid, _usernameTextController.text,
+                                  _emailTextController.text);
 
                               //To notify the user account have created
                               final snackbar = SnackBar(
-                                content: Text("Yay, Account Created!\nWelcome ${username}"),
+                                content: Text(
+                                    "Yay, Account Created!\nWelcome $username"),
                                 action: SnackBarAction(
                                     label: 'OK', onPressed: () {}),
                               );
@@ -187,7 +205,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   errorMessage = 'Please use a valid email.';
                                 } else {
                                   // Other FirebaseAuthException errors
-                                  errorMessage = 'An Error Occurred\nError: ${error.code.toString()}';
+                                  errorMessage =
+                                      'An Error Occurred\nError: ${error.code.toString()}';
                                 }
                               } else {
                                 // Other errors
@@ -197,7 +216,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
-                                        title: const Text("Registration Failed"),
+                                        title:
+                                            const Text("Registration Failed"),
                                         content: Text(errorMessage),
                                         actions: [
                                           TextButton(

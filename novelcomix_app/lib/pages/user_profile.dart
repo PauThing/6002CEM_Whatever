@@ -21,10 +21,9 @@ class _UserProfileState extends State<UserProfile> {
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _passwordTextController = TextEditingController();
 
-  String username = '';
+  String username = 'asdw';
 
   @override
-
   void fetchUsername() {
     User? user = FirebaseAuth.instance.currentUser;
 
@@ -39,6 +38,8 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Widget build(BuildContext context) {
+    fetchUsername();
+
     return Stack(
       children: [
         BackgroundImage(),
@@ -83,7 +84,8 @@ class _UserProfileState extends State<UserProfile> {
                                 decoration: InputDecoration(
                                   labelText: 'Username',
                                 ),
-                                controller: TextEditingController(text: username),
+                                controller:
+                                    TextEditingController(text: username),
                               ),
                             ),
                             SizedBox(
@@ -113,27 +115,8 @@ class _UserProfileState extends State<UserProfile> {
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xFF731942)),
                                 onPressed: () {
-                                  // FirebaseAuth.instance
-                                  //     .createUserWithEmailAndPassword(
-                                  //         email: _emailTextController.text,
-                                  //         password: _passwordTextController.text)
-                                  //     .then((value) {
-                                  //   final snackbar = SnackBar(
-                                  //     content: const Text("Yay, Account Updated!"),
-                                  //     action: SnackBarAction(
-                                  //         label: 'OK', onPressed: () {}),
-                                  //   );
-                                  //   ScaffoldMessenger.of(context)
-                                  //       .showSnackBar(snackbar);
 
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                          const LoginPage()));
-                                  // }).onError((error, stackTrace) {
-                                  //   print("Error ${error.toString()}");
-                                  // });
+
                                 },
                                 icon: Icon(
                                   Icons.security_update_good,
@@ -147,8 +130,6 @@ class _UserProfileState extends State<UserProfile> {
                                 ),
                               ),
                             ),
-
-
                           ],
                         ),
                       ),
