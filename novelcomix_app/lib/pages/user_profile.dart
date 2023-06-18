@@ -111,12 +111,16 @@ class _UserProfileState extends State<UserProfile> {
     final DateTime? picked = await showDatePicker(
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: ThemeData.light().copyWith(
-            primaryColor: Color(0xFF731942),
-            // Custom color for date picker header
-            accentColor:
-                Color(0xFF731942), // Custom color for date picker selection
-          ),
+          data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: Color(0xFF731942),
+                onPrimary: Colors.white,
+                onSurface: Colors.black,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                  style: TextButton.styleFrom(
+                foregroundColor: Color(0xFF731942),
+              ))),
           child: child!,
         );
       },
@@ -161,7 +165,11 @@ class _UserProfileState extends State<UserProfile> {
               child: Column(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(top: 30, right: 30, left: 30,),
+                    padding: const EdgeInsets.only(
+                      top: 30,
+                      right: 30,
+                      left: 30,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -338,12 +346,20 @@ class _UserProfileState extends State<UserProfile> {
                                     Icons.calendar_month,
                                     color: Colors.black26,
                                   ),
-                                  Text(
-                                    _setBirthdate,
-                                    style: TextStyle(
-                                      fontSize: 16,
+                                  if (_setBirthdate == '')
+                                    Text(
+                                      " Select your birthdate",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    )
+                                  else
+                                    Text(
+                                      " " + _setBirthdate,
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
                                     ),
-                                  ),
                                 ],
                               ),
                             ),
