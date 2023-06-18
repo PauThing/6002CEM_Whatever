@@ -8,6 +8,7 @@ import 'package:novelcomix_app/design/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   static String routeName = '/LoginPage';
+
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -70,6 +71,13 @@ class _LoginPageState extends State<LoginPage> {
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Color(0xFF731942)),
                           onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Center(
+                                      child: CircularProgressIndicator());
+                                });
+
                             FirebaseAuth.instance
                                 .signInWithEmailAndPassword(
                                     email: _emailTextController.text,
@@ -78,12 +86,19 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage(comicList: [], novelList: [],)));
+                                      builder: (context) => HomePage(
+                                            comicList: [],
+                                            novelList: [],
+                                          )));
                             }).onError((error, stackTrace) {
                               final snackbar = SnackBar(
-                                content: const Text("Sorry, Invalid Email or Password.."),
-                                action: SnackBarAction(label: 'OK', onPressed: (){}),);
-                              ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                                content: const Text(
+                                    "Sorry, Invalid Email or Password.."),
+                                action: SnackBarAction(
+                                    label: 'OK', onPressed: () {}),
+                              );
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackbar);
                             });
                           },
                           icon: Icon(

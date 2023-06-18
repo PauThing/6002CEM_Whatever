@@ -6,7 +6,7 @@ class BackgroundImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ShaderMask(
-      shaderCallback: (bounds) => LinearGradient(
+      shaderCallback: (bounds) => const LinearGradient(
         colors: [Colors.white, Colors.white12],
         begin: Alignment.bottomCenter,
         end: Alignment.center,

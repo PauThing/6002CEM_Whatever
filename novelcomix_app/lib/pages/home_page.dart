@@ -5,7 +5,6 @@ import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:novelcomix_app/models/novel_model.dart';
 import 'package:novelcomix_app/pages/bookmark_page.dart';
 import 'package:novelcomix_app/pages/comic_detail_page.dart';
-import 'package:novelcomix_app/pages/comic_list_page.dart';
 import 'package:novelcomix_app/pages/comic_page.dart';
 import 'package:novelcomix_app/pages/login_page.dart';
 import 'package:novelcomix_app/pages/novel_page.dart';
@@ -15,13 +14,16 @@ import 'package:novelcomix_app/widgets/bottom_navigation_bar.dart';
 import 'package:novelcomix_app/data/comic.dart';
 import 'package:novelcomix_app/data/novel.dart';
 
+import 'novel_detail_page.dart';
+
 class HomePage extends StatefulWidget {
   final List<ComicModel> comicList;
   final List<NovelModel> novelList;
 
   static String routeName = '/HomePage';
 
-  const HomePage({Key? key, required this.comicList, required this.novelList}) : super(key: key);
+  const HomePage({Key? key, required this.comicList, required this.novelList})
+      : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -29,8 +31,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
-
-  // Function() refreshUI;
 
   List screens = [Home(), BookmarkPage(), ComicPage(), NovelPage()];
 
@@ -130,8 +130,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final ongoingComics = comicList.where((comic) => comic.status == 'Ongoing').toList();
-  final ongoingNovels = novelList.where((novel) => novel.status == 'Ongoing').toList();
+  final ongoingComics =
+      comicList.where((comic) => comic.status == 'Ongoing').toList();
+  final ongoingNovels =
+      novelList.where((novel) => novel.status == 'Ongoing').toList();
+  late NovelModel novelModel;
 
   @override
   Widget build(BuildContext context) {
@@ -163,7 +166,10 @@ class _HomeState extends State<Home> {
                         return GestureDetector(
                           onTap: () {
                             // Navigate to the NovelPage when the image is clicked
-
+                            Navigator.of(context).pushNamed(
+                              ComicDetailPage.routeName,
+                              arguments: comic,
+                            );
                           },
                           child: Container(
                             width: 210,
@@ -171,11 +177,11 @@ class _HomeState extends State<Home> {
                               title: Column(
                                 children: [
                                   AspectRatio(
-                                      aspectRatio: 2/3,
-                                      child: Image.network(
-                                          comic.imageUrl,
-                                          fit: BoxFit.cover,
-                                      ),
+                                    aspectRatio: 2 / 3,
+                                    child: Image.network(
+                                      comic.imageUrl,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                   SizedBox(height: 8),
                                   Text(
@@ -219,28 +225,37 @@ class _HomeState extends State<Home> {
                       itemCount: ongoingNovels.length,
                       itemBuilder: (context, index) {
                         NovelModel novel = ongoingNovels[index];
-                        return Container(
-                          width: 210,
-                          child: ListTile(
-                            title: Column(
-                              children: [
-                                AspectRatio(
-                                  aspectRatio: 2/3,
-                                  child: Image.network(
-                                    novel.imageUrl,
-                                    fit: BoxFit.cover,
+                        return GestureDetector(
+                          onTap: () {
+                            // Navigate to the NovelPage when the image is clicked
+                            Navigator.of(context).pushNamed(
+                              NovelDetailPage.routeName,
+                              arguments: novel,
+                            );
+                          },
+                          child: Container(
+                            width: 210,
+                            child: ListTile(
+                              title: Column(
+                                children: [
+                                  AspectRatio(
+                                    aspectRatio: 2 / 3,
+                                    child: Image.network(
+                                      novel.imageUrl,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 8),
-                                Text(
-                                  novel.title,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
+                                  SizedBox(height: 8),
+                                  Text(
+                                    novel.title,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

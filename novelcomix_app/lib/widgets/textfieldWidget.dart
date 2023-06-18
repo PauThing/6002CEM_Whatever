@@ -28,7 +28,8 @@ TextField forTextField(String text, IconData icon, bool isPasswordType,
   );
 }
 
-TextField forReadTextField(String text, IconData icon, bool isPasswordType, bool isWriteType, String detail) {
+TextField forReadTextField(String text, IconData icon, bool isPasswordType,
+    bool isWriteType, String detail) {
   return TextField(
     readOnly: isWriteType,
     obscureText: isPasswordType,

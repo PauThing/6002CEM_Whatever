@@ -4,7 +4,6 @@ import 'package:novelcomix_app/models/comic_model.dart';
 import 'package:collection/collection.dart';
 
 class ComicDetailPage extends StatelessWidget {
-
   static String routeName = '/comicDetailPage';
 
   Function() refreshUI;
@@ -68,9 +67,7 @@ class ComicDetailPage extends StatelessWidget {
             ),
             const Text(
               "Description",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
             const SizedBox(
               height: 10,
@@ -89,9 +86,7 @@ class ComicDetailPage extends StatelessWidget {
             ),
             const Text(
               "Chapters",
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w900),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900),
             ),
             const SizedBox(
               height: 10,
@@ -106,7 +101,9 @@ class ComicDetailPage extends StatelessWidget {
                     width: 115,
                     child: Padding(
                       padding: const EdgeInsets.only(
-                          top: 12.0, bottom: 12.0,),
+                        top: 12.0,
+                        bottom: 12.0,
+                      ),
                       child: Text(
                         "Chapter " + i.toString(),
                         textAlign: TextAlign.center,
