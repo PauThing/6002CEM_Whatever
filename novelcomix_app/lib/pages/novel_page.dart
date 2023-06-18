@@ -35,6 +35,7 @@ class NovelPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => NovelGenreWidget(
                       nGenreModel: novelGenreList[index],
                     ),

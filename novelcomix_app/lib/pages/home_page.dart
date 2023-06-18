@@ -159,6 +159,7 @@ class _HomeState extends State<Home> {
                   Container(
                     height: 330,
                     child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: ongoingComics.length,
                       itemBuilder: (context, index) {
@@ -221,6 +222,7 @@ class _HomeState extends State<Home> {
                   Container(
                     height: 330,
                     child: ListView.builder(
+                      physics: BouncingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
                       itemCount: ongoingNovels.length,
                       itemBuilder: (context, index) {

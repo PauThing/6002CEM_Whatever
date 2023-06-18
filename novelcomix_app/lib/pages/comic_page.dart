@@ -35,6 +35,7 @@ class ComicPage extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (context, index) => ComicGenreWidget(
                       cGenreModel: comicGenreList[index],
                     ),

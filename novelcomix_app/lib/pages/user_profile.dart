@@ -15,7 +15,10 @@ class UserProfile extends StatefulWidget {
 }
 
 class _UserProfileState extends State<UserProfile> {
+  TextEditingController _fullnameTextController = TextEditingController();
   TextEditingController _usernameTextController = TextEditingController();
+
+  late String _fullname = '';
   late String _username = '';
   late String _email = '';
   late String _gender = '';
@@ -42,11 +45,13 @@ class _UserProfileState extends State<UserProfile> {
         if (userSnapshot.docs.isNotEmpty) {
           final userData = userSnapshot.docs.first.data();
           setState(() {
+            _fullname = userData['fullname'] ?? '';
             _username = userData['username'] ?? '';
             _email = userData['email'] ?? '';
             _gender = userData['gender'] ?? '';
-            _usernameTextController.text = _username;
             _selectedGender = _gender;
+            _fullnameTextController.text = _fullname;
+            _usernameTextController.text = _username;
           });
         }
       }
@@ -55,6 +60,7 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
+  // Update user data
   Future<void> updateUserData() async {
     try {
       final uid = _auth.currentUser?.uid;
@@ -68,26 +74,27 @@ class _UserProfileState extends State<UserProfile> {
         if (userQuerySnapshot.docs.isNotEmpty) {
           final userDoc = userQuerySnapshot.docs.first;
           final userRef =
-          FirebaseFirestore.instance.collection('users').doc(userDoc.id);
+              FirebaseFirestore.instance.collection('users').doc(userDoc.id);
 
           await userRef.update({
+            'fullname': _fullnameTextController.text,
             'username': _usernameTextController.text,
             'gender': _selectedGender,
           });
 
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User data updated successfully')),
+            SnackBar(content: Text('User data updated successfully :D')),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('User not found')),
+            SnackBar(content: Text('User not found, WHO ARE YOU???')),
           );
         }
       }
     } catch (error) {
       print('Error updating user data: $error');
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update user data')),
+        SnackBar(content: Text('Failed to update user data :(')),
       );
     }
   }
@@ -100,17 +107,13 @@ class _UserProfileState extends State<UserProfile> {
 
   @override
   Widget build(BuildContext context) {
-    if (_username == null || _email == null) {
-      return Center(child: CircularProgressIndicator());
-    }
-
     return Stack(
       children: [
         const BackgroundImage(),
         Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               "Profile",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -124,13 +127,24 @@ class _UserProfileState extends State<UserProfile> {
                 children: [
                   Container(
                     child: forTextField(
+                      "Full Name",
+                      Icons.drive_file_rename_outline_sharp,
+                      false,
+                      _fullnameTextController,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: forTextField(
                       "Username",
                       Icons.person,
                       false,
                       _usernameTextController,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
@@ -142,7 +156,7 @@ class _UserProfileState extends State<UserProfile> {
                       _email,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   if (_gender == '')
@@ -150,7 +164,7 @@ class _UserProfileState extends State<UserProfile> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             'Gender',
                             style: TextStyle(
                               fontSize: 16,
@@ -169,7 +183,7 @@ class _UserProfileState extends State<UserProfile> {
                                   });
                                 },
                               ),
-                              Text('Male'),
+                              const Text('Male'),
                               Radio<String>(
                                 value: 'Female',
                                 groupValue: _selectedGender,
@@ -179,7 +193,7 @@ class _UserProfileState extends State<UserProfile> {
                                   });
                                 },
                               ),
-                              Text('Female'),
+                              const Text('Female'),
                             ],
                           ),
                         ],
@@ -195,7 +209,7 @@ class _UserProfileState extends State<UserProfile> {
                         _gender,
                       ),
                     ),
-                  SizedBox(
+                  const SizedBox(
                     height: 80,
                   ),
                   Container(

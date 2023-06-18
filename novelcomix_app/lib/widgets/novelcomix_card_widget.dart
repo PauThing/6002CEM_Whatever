@@ -53,7 +53,7 @@ class ComicCardWidget extends StatelessWidget {
                     Text(
                       comicModel.title,
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -160,7 +160,7 @@ class NovelCardWidget extends StatelessWidget {
                     Text(
                       novelModel.title,
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                       softWrap: true,
