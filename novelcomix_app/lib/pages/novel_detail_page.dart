@@ -63,6 +63,30 @@ class NovelDetailPage extends StatelessWidget {
                 fontStyle: FontStyle.italic,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Publication Year : ${novelModel.publication}",
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Status : ${novelModel.status}",
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                color: Colors.grey,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
             const Divider(
               color: Colors.black,
             ),

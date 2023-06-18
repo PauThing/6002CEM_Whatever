@@ -161,48 +161,91 @@ class _UserProfileState extends State<UserProfile> {
               child: Column(
                 children: [
                   Container(
-                    child: forTextField(
-                      "Full Name",
-                      Icons.drive_file_rename_outline_sharp,
-                      false,
-                      _fullnameTextController,
+                    padding: const EdgeInsets.only(top: 30, right: 30, left: 30,),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Full Name',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        forTextField(
+                          "Full Name",
+                          Icons.drive_file_rename_outline_sharp,
+                          false,
+                          _fullnameTextController,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   Container(
-                    child: forTextField(
-                      "Username",
-                      Icons.person,
-                      false,
-                      _usernameTextController,
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Username',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        forTextField(
+                          "Username",
+                          Icons.person,
+                          false,
+                          _usernameTextController,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   Container(
-                    child: forReadTextField(
-                      "Email",
-                      Icons.email,
-                      false,
-                      true,
-                      _email,
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Email',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        forReadTextField(
+                          "Email",
+                          Icons.email,
+                          false,
+                          true,
+                          _email,
+                        ),
+                      ],
                     ),
                   ),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   if (_gender == '')
                     Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
                             'Gender',
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -236,25 +279,40 @@ class _UserProfileState extends State<UserProfile> {
                     )
                   else
                     Container(
-                      child: forReadTextField(
-                        "Gender",
-                        Icons.transgender,
-                        false,
-                        true,
-                        _gender,
+                      padding: const EdgeInsets.symmetric(horizontal: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Gender',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          forReadTextField(
+                            "Gender",
+                            Icons.transgender,
+                            false,
+                            true,
+                            _gender,
+                          ),
+                        ],
                       ),
                     ),
                   const SizedBox(
-                    height: 15,
+                    height: 25,
                   ),
                   Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Birthdate',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
