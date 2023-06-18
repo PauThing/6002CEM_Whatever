@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 125),
+                  padding: const EdgeInsets.only(top: 75),
                   child: Column(
                     children: [
                       Container(
