@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:novelcomix_app/design/background_image.dart';
-import 'package:novelcomix_app/widgets/comic_bookmark.dart';
-import 'package:novelcomix_app/widgets/novel_bookmark.dart';
+import 'package:novelcomix_app/pages/comic_bookmark.dart';
+import 'package:novelcomix_app/pages/novel_bookmark.dart';
 import 'package:novelcomix_app/widgets/bookmark_bar.dart';
 
 class BookmarkPage extends StatefulWidget {

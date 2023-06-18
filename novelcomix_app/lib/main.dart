@@ -10,12 +10,12 @@ import 'package:novelcomix_app/pages/novel_detail_page.dart';
 import 'package:novelcomix_app/pages/novel_list_page.dart';
 import 'package:novelcomix_app/pages/novel_page.dart';
 import 'package:novelcomix_app/pages/user_profile.dart';
-import 'package:novelcomix_app/widgets/comic_bookmark.dart';
-import 'package:novelcomix_app/widgets/novel_bookmark.dart';
+import 'package:novelcomix_app/pages/comic_bookmark.dart';
+import 'package:novelcomix_app/pages/novel_bookmark.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();             //ensure Firebase initialised before app run
+  await Firebase.initializeApp(); //ensure Firebase initialised before app run
   runApp(const MyApp());
 }
 
@@ -47,17 +47,24 @@ class _MyAppState extends State<MyApp> {
       initialRoute: LoginPage.routeName,
       routes: {
         LoginPage.routeName: (context) => const LoginPage(),
-        HomePage.routeName: (context) => HomePage(comicList: [], novelList: [],),
+        HomePage.routeName: (context) => HomePage(
+              comicList: [],
+              novelList: [],
+            ),
         UserProfile.routeName: (context) => UserProfile(),
         BookmarkPage.routeName: (context) => BookmarkPage(),
         ComicBookmarkPage.routeName: (context) => ComicBookmarkPage(),
         NovelBookmarkPage.routeName: (context) => NovelBookmarkPage(),
         ComicPage.routeName: (context) => ComicPage(),
         ComicListPage.routeName: (context) => ComicListPage(),
-        ComicDetailPage.routeName: (context) => ComicDetailPage(refreshUI: refresh,),
+        ComicDetailPage.routeName: (context) => ComicDetailPage(
+              refreshUI: refresh,
+            ),
         NovelPage.routeName: (context) => NovelPage(),
         NovelListPage.routeName: (context) => NovelListPage(),
-        NovelDetailPage.routeName: (context) => NovelDetailPage(refreshUI: refresh,),
+        NovelDetailPage.routeName: (context) => NovelDetailPage(
+              refreshUI: refresh,
+            ),
       },
     );
   }
