@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../design/background_image.dart';
 import '../widgets/textfieldWidget.dart';
 import 'login_page.dart';
+import 'package:intl/intl.dart';
 
 class UserProfile extends StatefulWidget {
   static String routeName = '/UserProfile';
@@ -23,6 +24,9 @@ class _UserProfileState extends State<UserProfile> {
   late String _email = '';
   late String _gender = '';
   late String _selectedGender = '';
+  late String _birthdate = '';
+  late String _setBirthdate = '';
+  late DateTime _selectedDate;
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -49,9 +53,11 @@ class _UserProfileState extends State<UserProfile> {
             _username = userData['username'] ?? '';
             _email = userData['email'] ?? '';
             _gender = userData['gender'] ?? '';
+            _birthdate = userData['birthdate'] ?? '';
             _selectedGender = _gender;
             _fullnameTextController.text = _fullname;
             _usernameTextController.text = _username;
+            _setBirthdate = _birthdate;
           });
         }
       }
@@ -80,6 +86,7 @@ class _UserProfileState extends State<UserProfile> {
             'fullname': _fullnameTextController.text,
             'username': _usernameTextController.text,
             'gender': _selectedGender,
+            'birthdate': _setBirthdate,
           });
 
           ScaffoldMessenger.of(context).showSnackBar(
@@ -99,9 +106,37 @@ class _UserProfileState extends State<UserProfile> {
     }
   }
 
+  // For date picker
+  Future<void> _selectDate() async {
+    final DateTime? picked = await showDatePicker(
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: Color(0xFF731942),
+            // Custom color for date picker header
+            accentColor:
+                Color(0xFF731942), // Custom color for date picker selection
+          ),
+          child: child!,
+        );
+      },
+      context: context,
+      initialDate: _selectedDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+        _setBirthdate = DateFormat('yyyy-MM-dd').format(_selectedDate);
+      });
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _selectedDate = DateTime.now();
     fetchUserData();
   }
 
@@ -209,6 +244,65 @@ class _UserProfileState extends State<UserProfile> {
                         _gender,
                       ),
                     ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Birthdate',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        if (_birthdate.isEmpty)
+                          InkWell(
+                            onTap: () {
+                              _selectDate();
+                            },
+                            child: Container(
+                              height: 50,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              alignment: Alignment.centerLeft,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.calendar_month,
+                                    color: Colors.black26,
+                                  ),
+                                  Text(
+                                    _setBirthdate,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        else
+                          Container(
+                            child: forReadTextField(
+                              "Birthdate",
+                              Icons.calendar_today,
+                              false,
+                              true,
+                              _birthdate,
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(
                     height: 80,
                   ),
